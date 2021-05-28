@@ -1,27 +1,44 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <meta charset="utf8" />
-  <title>{{title}}</title>
-  <!-- needed for adaptive design -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-    }
-  </style>
-  {{{redocHead}}}
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+<meta charset="utf8" />
+<title>{{title}}</title>
+<!-- needed for adaptive design -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{{{redocHead}}}
+
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto|Fieldwork|Open+Sans" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/glj6vlc.css">
+
+<style>
+body {padding: 0;margin: 0;}
+.-depth0 {font-weight:700 !important;text-transform:none !important;color:#033d58 !important;font-size:16px !important;border-bottom:1px solid #cccccc;padding-bottom:5px;}
+.-depth1:hover {background:#10639B !important;font-weight:700 !important;text-transform:none !important;color:#FFF !important;}
+.-depth1 {font-weight:700 !important;color:#333333 !important;}
+.active {background:#10639B !important;color:#FFF !important;font-weight:700 !important;}
+.search-input {font-size:16px !important;}
+h1 {color: #033d58 !important;padding-top:20px;font-weight:bold !important;}
+.boomiheader{background-color:#033d58;padding-top:9px;padding-left:20px;padding-bottom:7px;vertical-align:middle;}
+.logo{outline: none;width: auto;height: 36px;display: inline-flex;}
+</style>
+
 </head>
 
 <body>
-  {{{redocHTML}}}
+<div class="boomiheader">
+<span class="logo" style="padding-bottom=:6px;padding-top:1px;">
+<img src="https://help.boomi.com/assets/img/customImages/logo.svg?f26585acc442f63f64b4b483fa47c2c5" alt="Boomi AtomSphere Logo">
+<span class="AtomSphere" style="padding-left: 15px;padding-top: 9px;font-weight: 100;font-size: 20px;font-family: Fieldwork;color: #FF7C66;font-weight: bold;vertical-align:middle;">AtomSphere</span>
+<span style="padding-left: 15px;padding-top: 9px;font-weight: 100;font-size: 20px;font-family: Fieldwork;color: #FFF;vertical-align:middle;">Documentation</span>
+</span></div>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-40515923-4"></script>
-  <script>
+{{{redocHTML}}}
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-40515923-4"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
