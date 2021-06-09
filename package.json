@@ -1,0 +1,25 @@
+{
+  "name": "docs-api",
+  "version": "1.0.0",
+  "description": "Boomi Flow API Documentation ============================",
+  "main": "merge-schemas.js",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manywho/docs-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manywho/docs-api/issues"
+  },
+  "homepage": "https://github.com/manywho/docs-api#readme",
+  "dependencies": {
+    "deepmerge": "^4.2.2",
+    "node-fetch": "^2.6.1",
+    "redoc": "2.0.0-rc.53"
+  }
+}
