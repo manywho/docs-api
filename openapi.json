@@ -2,7 +2,8 @@
     "swagger": "2.0",
     "info": {
         "title": "Boomi Flow",
-        "version": "v1"
+        "version": "v1",
+        "description": ""
     },
     "paths": {
         "/api/admin/1/directory/user/password": {
@@ -11,7 +12,7 @@
                     "Admin Admin"
                 ],
                 "summary": "Reset Password",
-                "description": "The password reset API is only applicable to Flow Builders. For running users, the user identity is managed\r\nby the underlying Service (e.g. Salesforce, Box, Google), and therefore user resets should be performed on\r\nthe underlying system, not within ManyWho. The password reset API requires two separate API calls to\r\ncomplete. The first API call sends the user the password reset notification. The second API call performs\r\nthe actual password change, based on the token provided in the notification.\r\n\r\nIf a notification is provided, the <code>redirectUrl</code> property should include two parameters in the\r\ncontent - one for the notification result (<code>{0}</code>) and one for the reset token (<code>{1}</code>).\r\nThe platform will automatically parse the notification result and <code>callbackUri</code> values at these\r\npositions in the content.\r\n\r\nThe result parameter has the following possible values:\r\n\r\n* **OK:** The password reset was correctly processed\r\n* **ALREADY_PROCESSED**: The password reset token has already been processed by the Platform and the user is re-using the link\r\n\r\nTo add the password verification URL to the notification, simply add `PASSWORD_URL_HERE` to the content of\r\nthe message and the platform will replace this with the actual verification callback URL, which will in turn\r\nforward to the `redirectUrl`.",
+                "description": "The password reset API is only applicable to Flow Builders. For running users, the user identity is managed by the underlying Service (e.g. Salesforce, Box, Google), and therefore user resets should be performed on the underlying system, not within Boomi Flow. \r\n\r\nThe password reset API requires two separate API calls to complete. The first API call sends the user the password reset notification. The second API call performs the actual password change, based on the token provided in the notification. If a notification is provided, the <code>redirectUrl</code> property should include two parameters in the content - one for the notification result (<code>{0}</code>) and one for the reset token (<code>{1}</code>). The platform will automatically parse the notification result and <code>callbackUri</code> values at these positions in the content. \r\n\r\nThe result parameter has the following possible values:\r\n* **OK:** The password reset was correctly processed\r\n*  **ALREADY_PROCESSED**: The password reset token has already been processed by the Platform and the user is re-using the link\r\n\r\nTo add the password verification URL to the notification, simply add `PASSWORD_URL_HERE` to the content of the message and the platform will replace this with the actual verification callback URL, which will in turn forward to the `redirectUrl`.",
                 "consumes": [
                     "",
                     "application/json-patch+json",
