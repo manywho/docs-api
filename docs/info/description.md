@@ -1,6 +1,6 @@
 # Boomi Flow API
 
-This API reference provides information on the available endpoints in the Boomi Flow Restful API, including parameters and response data format.
+This API reference provides information on the available endpoints in the Boomi Flow RESTful API, including parameters and response data format.
 
 As Boomi Flow is based on an <a href="http://help.boomi.com/csh?context=GUID-b7cbf7a7-bcd0-4d1c-b926-69854df699ec" target="_blank">API-first architecture</a>, many of the operations performed within Boomi Flow can be accessed through this API. 
 
