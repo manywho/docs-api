@@ -6,6 +6,16 @@ As Boomi Flow is based on an <a href="http://help.boomi.com/csh?context=GUID-b7c
 
 Before you can start using the API, you will need to create a Boomi Flow account.
 
+## Making a request to the API
+
+API endpoint requests should be appended to the Boomi Flow API Host at:
+
+- flow.boomi.com
+
+For example:
+
+GET **<span>ht</span>tps://flow.boomi.com**/api/draw/1/flow
+
 > **NOTE:**  The <a href="http://help.boomi.com/csh?context=GUID-95ad682d-ce04-494a-9235-e113a89406bc" target="_blank">API tool</a> in Boomi Flow allows you to automatically authorize and interact with the API within the Boomi Flow application.
 
 # Authentication
