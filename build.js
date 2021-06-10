@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const redocCommand = 'npx redoc-cli bundle openapi.json --output=index.html --title="Boomi Flow API Reference" --template template.hbs --options.nativeScrollbars --options.theme.colors.main=#007db8 --options.lazyRendering --options.requiredPropsFirst --options.suppressWarning --options.theme.rightPanel.backgroundColor=#282c34 --options.theme.rightPanel.textColor=#FFFFFF --options.theme.typography.code.backgroundColor=#282c34 --options.theme.typography.code.color=#FFF --options.theme.typography.fontSize=15px --options.theme.spacing.sectionVertical=10 --options.theme.colors.tonalOffset=0.9 --options.theme.sidebar.width=300px --options.theme.sidebar.textColor=#10639b';
+const redocCommand = 'npx redoc-cli bundle openapi.json --output=index.html --title="Boomi Flow API Reference" --template template.hbs --options.nativeScrollbars --options.theme.colors.main=#007db8 --options.lazyRendering --options.requiredPropsFirst --options.suppressWarning --options.theme.rightPanel.backgroundColor=#282c34 --options.theme.rightPanel.textColor=#FFFFFF --options.theme.typography.code.backgroundColor=#121417 --options.theme.typography.code.color=#ffffff --options.theme.typography.fontSize=16px --options.theme.spacing.sectionVertical=10 --options.theme.colors.tonalOffset=0.9 --options.theme.sidebar.width=300px --options.theme.sidebar.textColor=#10639b --options.noAutoAuth --options.hideDownloadButton';
 
 const urlToFilePath = (path) => path.slice(1).split('/').join('~');
 
