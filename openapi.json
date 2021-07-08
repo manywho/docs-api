@@ -1839,6 +1839,40 @@
                 }
             }
         },
+        "/api/dashboard/1/flow/{id}": {
+            "get": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "summary": "List number of launches (States) for a Flow",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "in": "query",
+                        "name": "interval",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/DashboardFlowLaunchesResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/draw/1/assets": {
             "get": {
                 "tags": [
@@ -4231,6 +4265,60 @@
                                 "$ref": "#/definitions/ValueElementIdReferenceAPI"
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/features/1/global": {
+            "get": {
+                "tags": [
+                    "Features Features"
+                ],
+                "summary": "Lists Feature Flags",
+                "description": "Retrieves a list of all the feature flags that are applied globally across all tenants.",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/FeatureFlagAPI"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/features/1/tenant": {
+            "put": {
+                "tags": [
+                    "Features Features"
+                ],
+                "summary": "Updates Feature Flag Tenant",
+                "description": "Update feature flags for a specific tenant. The selected feature flag is only enabled for the specified tenant.",
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/TenantFeatureUpdateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
                     }
                 }
             }
@@ -8301,6 +8389,35 @@
                 }
             }
         },
+        "FeatureFlagAPI": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "developerName": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                }
+            }
+        },
         "TenantResponseAPI": {
             "type": "object",
             "properties": {
@@ -8352,6 +8469,13 @@
                 },
                 "restrictions": {
                     "$ref": "#/definitions/TenantRestrictionsAPI"
+                },
+                "featureFlags": {
+                    "description": "Feature Flags related to the tenant",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FeatureFlagAPI"
+                    }
                 }
             }
         },
@@ -8387,6 +8511,13 @@
                 },
                 "restrictions": {
                     "$ref": "#/definitions/TenantRestrictionsAPI"
+                },
+                "featureFlags": {
+                    "description": "Feature Flags related to the tenant",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/FeatureFlagAPI"
+                    }
                 }
             }
         },
@@ -8876,6 +9007,40 @@
                 },
                 "addedBy": {
                     "$ref": "#/definitions/BuilderWhoAPI"
+                }
+            }
+        },
+        "DasboardLaunchesResponse": {
+            "type": "object",
+            "properties": {
+                "bucket": {
+                    "type": "string"
+                },
+                "counter": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "DashboardFlowLaunchesResponse": {
+            "type": "object",
+            "properties": {
+                "flowId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "flowName": {
+                    "type": "string"
+                },
+                "flowLaunchTotal": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "flowLaunchData": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DasboardLaunchesResponse"
+                    }
                 }
             }
         },
@@ -12652,6 +12817,22 @@
                 }
             }
         },
+        "TenantFeatureUpdateRequest": {
+            "type": "object",
+            "properties": {
+                "tenantId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "featureFlagId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
         "NotificationAPI": {
             "type": "object",
             "properties": {
@@ -15182,6 +15363,11 @@
             "x-displayName": "Value Element"
         },
         {
+            "name": "Features Features",
+            "description": "A controller to be consumed by the tooling to access developer/pm/po \r\ndriven feature flags.",
+            "x-displayName": "Features"
+        },
+        {
             "name": "Notifications Notifications",
             "description": "The notifications API allows you to view any notifications sent to your or inside your tenant.",
             "x-displayName": "Notifications"
@@ -15286,6 +15472,12 @@
                 "Draw Tag Element",
                 "Draw Type Element",
                 "Draw Value Element"
+            ]
+        },
+        {
+            "name": "Features",
+            "tags": [
+                "Features Features"
             ]
         },
         {
