@@ -10076,6 +10076,12 @@
                 },
                 "valueElementToReferenceTypeElementId": {
                     "type": "string"
+                },
+                "valueElementToApplySortBy": {
+                    "type": "string"
+                },
+                "valueElementToApplySortDirection": {
+                    "type": "string"
                 }
             }
         },
