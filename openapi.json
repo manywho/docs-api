@@ -9722,6 +9722,10 @@
                 "authorization": {
                     "$ref": "#/definitions/GroupAuthorizationAPI"
                 },
+                "isOpen": {
+                    "description": "Is the Group open in the buildtime editor. default: true",
+                    "type": "boolean"
+                },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
                     "type": "string"
@@ -10694,6 +10698,10 @@
                 },
                 "authorization": {
                     "$ref": "#/definitions/GroupAuthorizationAPI"
+                },
+                "isOpen": {
+                    "description": "Is the Group open in the buildtime editor. default: true",
+                    "type": "boolean"
                 },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
@@ -11938,6 +11946,10 @@
                 },
                 "authorization": {
                     "$ref": "#/definitions/GroupAuthorizationAPI"
+                },
+                "isOpen": {
+                    "description": "Is the Group open in the buildtime editor. default: true",
+                    "type": "boolean"
                 },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
