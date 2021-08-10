@@ -6,89 +6,6 @@
         "description": "# Boomi Flow API\n\nThis API reference provides information on the available endpoints in the Boomi Flow REST API, including parameters and response data format.\n\nAs Boomi Flow is based on an <a href=\"http://help.boomi.com/csh?context=GUID-b7cbf7a7-bcd0-4d1c-b926-69854df699ec\" target=\"_blank\">API-first architecture</a>, many of the operations performed within Boomi Flow can be accessed through this API. \n\nBefore you can start using the API, you will need to create a Boomi Flow account.\n\n## Making a request to the API\n\nAPI endpoint requests should be appended to the Boomi Flow API Host at:\n\n- flow.boomi.com\n\nFor example:\n\nGET **<span>ht</span>tps://flow.boomi.com**/api/draw/1/flow\n\n> **NOTE:**  The <a href=\"http://help.boomi.com/csh?context=GUID-95ad682d-ce04-494a-9235-e113a89406bc\" target=\"_blank\">API tool</a> in Boomi Flow allows you to automatically authorize and interact with the API within the Boomi Flow application.\n\n# Authentication\n\nThe API supports authorization using either an API Key or an **Authorization** header.\n\nAPI keys are specific to a tenant, meaning that each API key only authenticates you for the tenant selected when generating the API key.\n\nYou can <a href=\"http://help.boomi.com/csh?context=GUID-7c393c4c-2193-40ee-b0aa-ef148c5b423c\" target=\"_blank\">manage your API keys</a> on the Boomi Flow **User Settings** page.\n\n> **NOTE:**  When making requests to the API, you may also need to include a **manywhotenant** header referencing the tenant ID value that the API key is associated with.\n\n## Authentication using an API Key\n\nTo use an API Key to authenticate requests to the Boomi Flow API:\n\n 1. <a href=\"http://help.boomi.com/csh?context=GUID-fab6941c-d8a2-433a-a2f2-6782eb873a02\" target=\"_blank\">Generate an API Key</a> in Boomi Flow, or by sending a POST request to the **api/admin/1/users/me/keys** endpoint. \n  \n 2. Add a **x-boomi-flow-api-key** header to your API requests instead of an Authorization header, to authenticate as yourself. This header should contain only the **apiKey** value of the API Key.\n\n3. If required, add a **manywhotenant** header referencing the tenant ID value that the API key is associated with.\n\n## Authentication using an Authorization header\n\nTo use an Authorization header:\n\n 1. Obtain a token by sending a POST request to the **api/draw/1/authentication** endpoint.\n \n 2. Insert the returned token into the standard HTTP **Authorization** header when performing any operations against the various supported APIs.\n"
     },
     "paths": {
-        "/api/admin/1/directory/user/password": {
-            "post": {
-                "tags": [
-                    "Admin Admin"
-                ],
-                "summary": "Reset Password",
-                "description": "The password reset API is only applicable to Flow Builders. For running users, the user identity is managed by the underlying Service (e.g. Salesforce, Box, Google), and therefore user resets should be performed on the underlying system, not within Boomi Flow. \n\nThe password reset API requires two separate API calls to complete. The first API call sends the user the password reset notification. The second API call performs the actual password change, based on the token provided in the notification. If a notification is provided, the <code>redirectUrl</code> property should include two parameters in the content - one for the notification result (<code>{0}</code>) and one for the reset token (<code>{1}</code>). The platform will automatically parse the notification result and <code>callbackUri</code> values at these positions in the content. \n\nThe result parameter has the following possible values:\n* **OK:** The password reset was correctly processed\n*  **ALREADY_PROCESSED**: The password reset token has already been processed by the Platform and the user is re-using the link\n\nTo add the password verification URL to the notification, simply add `PASSWORD_URL_HERE` to the content of the message and the platform will replace this with the actual verification callback URL, which will in turn forward to the `redirectUrl`.",
-                "consumes": [
-                    "",
-                    "application/json-patch+json",
-                    "application/json",
-                    "text/json",
-                    "application/*+json"
-                ],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "email",
-                        "description": "The email address of the account to initialize a password reset for",
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/NotificationRequestAPI"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    }
-                }
-            }
-        },
-        "/api/admin/1/directory/user/credential/{token}": {
-            "post": {
-                "tags": [
-                    "Admin Admin"
-                ],
-                "summary": "Apply Password Reset",
-                "description": "Apply the actual password change for an account, using the token generated from the notification callback\r\nsent in the \"Reset Password\" endpoint.\r\n\r\nThe token is not provided in the notification, but rather the token is provided after the user clicks on the\r\nnotification link. The token will either be parsed into the provided <code>redirectUrl</code> (if specified)\r\nor provided in the REST response from a GET request to the notification callback URL provided in the\r\nnotification.",
-                "consumes": [
-                    "",
-                    "application/json-patch+json",
-                    "application/json",
-                    "text/json",
-                    "application/*+json"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "token",
-                        "description": "The token that was provided to the user as part of the notification callback",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/PasswordResetAPI"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "type": "boolean"
-                        }
-                    }
-                }
-            }
-        },
         "/api/admin/1/provisioning": {
             "post": {
                 "tags": [
@@ -2009,43 +1926,6 @@
                         "description": "",
                         "schema": {
                             "$ref": "#/definitions/AssetAPI"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/draw/1/authentication": {
-            "post": {
-                "tags": [
-                    "Draw Authentication"
-                ],
-                "summary": "Authenticate",
-                "consumes": [
-                    "",
-                    "application/json-patch+json",
-                    "application/json",
-                    "text/json",
-                    "application/*+json"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/DrawAuthenticationRequestAPI"
                         }
                     }
                 ],
@@ -6901,57 +6781,12 @@
         }
     },
     "definitions": {
-        "NotificationMessageAPI": {
-            "type": "object",
-            "properties": {
-                "mediaType": {
-                    "description": "The media type for the message. Currently the platform only supports: text/html or text/plain",
-                    "type": "string"
-                },
-                "message": {
-                    "description": "The message string in the correct format for the media type.",
-                    "type": "string"
-                }
-            }
-        },
-        "NotificationRequestAPI": {
-            "type": "object",
-            "properties": {
-                "reason": {
-                    "description": "The reason for the notification. Typically, the reason will be provided as the 'subject' for email notifications.",
-                    "type": "string"
-                },
-                "redirectUrl": {
-                    "description": "The Url to redirect the user to once this notification has been processed by the platform.",
-                    "type": "string"
-                },
-                "notificationMessages": {
-                    "description": "The list of notification messages to be sent.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/NotificationMessageAPI"
-                    }
-                }
-            }
-        },
-        "PasswordResetAPI": {
-            "type": "object",
-            "properties": {
-                "password": {
-                    "description": "The new password to be applied to the flow builder account",
-                    "type": "string"
-                }
-            }
-        },
         "TenantRegistrationAPI": {
             "type": "object",
             "properties": {
                 "tenantName": {
                     "description": "The name of the tenant to create",
                     "type": "string"
-                },
-                "notification": {
-                    "$ref": "#/definitions/NotificationRequestAPI"
                 },
                 "firstName": {
                     "description": "The first name of the user",
@@ -6963,10 +6798,6 @@
                 },
                 "email": {
                     "description": "The email of the user",
-                    "type": "string"
-                },
-                "password": {
-                    "description": "The password for the user",
                     "type": "string"
                 }
             }
@@ -8743,12 +8574,6 @@
                 "email": {
                     "type": "string"
                 },
-                "password": {
-                    "type": "string"
-                },
-                "verified": {
-                    "type": "boolean"
-                },
                 "createdAt": {
                     "format": "date-time",
                     "type": "string"
@@ -8806,12 +8631,6 @@
                 },
                 "email": {
                     "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "verified": {
-                    "type": "boolean"
                 },
                 "createdAt": {
                     "format": "date-time",
@@ -9078,19 +8897,6 @@
                 },
                 "newKey": {
                     "description": "The key to move the asset to",
-                    "type": "string"
-                }
-            }
-        },
-        "DrawAuthenticationRequestAPI": {
-            "type": "object",
-            "properties": {
-                "username": {
-                    "description": "The username for your account in the directory",
-                    "type": "string"
-                },
-                "password": {
-                    "description": "The password for your account in the directory",
                     "type": "string"
                 }
             }
@@ -15277,11 +15083,6 @@
     },
     "tags": [
         {
-            "name": "Admin Admin",
-            "x-displayName": "Admin",
-            "description": ""
-        },
-        {
             "name": "Admin Provisioning",
             "x-displayName": "Provisioning"
         },
@@ -15463,7 +15264,6 @@
         {
             "name": "Admin",
             "tags": [
-                "Admin Admin",
                 "Admin Provisioning",
                 "Admin Runtimes",
                 "Admin States",
