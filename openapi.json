@@ -1756,6 +1756,68 @@
                 }
             }
         },
+        "/api/audit/1/search": {
+            "get": {
+                "tags": [
+                    "Audit Audit"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "type",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "from",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "in": "query",
+                        "name": "to",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "in": "query",
+                        "name": "user",
+                        "type": "array",
+                        "items": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageSize",
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/AuditEventItemCollectionResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/dashboard/1/flow/{id}": {
             "get": {
                 "tags": [
@@ -8829,6 +8891,104 @@
                 }
             }
         },
+        "AppUser": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "AuditEventFlowResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "version": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "developerName": {
+                    "type": "string"
+                }
+            }
+        },
+        "AuditEvent": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "occurredAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "userId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/AppUser"
+                },
+                "tenantId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "stateId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "flow": {
+                    "$ref": "#/definitions/AuditEventFlowResponse"
+                },
+                "data": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "AuditEventItemCollectionResponse": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                },
+                "links": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AuditEvent"
+                    },
+                    "readOnly": true
+                }
+            }
+        },
         "DasboardLaunchesResponse": {
             "type": "object",
             "properties": {
@@ -15111,6 +15271,10 @@
             "x-displayName": "Users"
         },
         {
+            "name": "Audit Audit",
+            "x-displayName": "Audit"
+        },
+        {
             "name": "Draw Assets",
             "x-displayName": "Assets"
         },
@@ -15270,6 +15434,12 @@
                 "Admin Stores",
                 "Admin Tenants and Subtenants",
                 "Admin Users"
+            ]
+        },
+        {
+            "name": "Audit",
+            "tags": [
+                "Audit Audit"
             ]
         },
         {
