@@ -9974,6 +9974,10 @@
                     "description": "Indicates if the platform should save state when navigating between elements",
                     "type": "boolean"
                 },
+                "persistValues": {
+                    "description": "Indicates if the platform should save values when navigating between elements",
+                    "type": "boolean"
+                },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
                     "type": "string"
@@ -10910,6 +10914,10 @@
                     "items": {
                         "$ref": "#/definitions/PageTagAPI"
                     }
+                },
+                "className": {
+                    "description": "A space separated string of CSS classes to be applied to the component when rendering.",
+                    "type": "string"
                 }
             }
         },
@@ -12138,6 +12146,10 @@
                 },
                 "persistState": {
                     "description": "Indicates if the platform should save state when navigating between elements",
+                    "type": "boolean"
+                },
+                "persistValues": {
+                    "description": "Indicates if the platform should save values when navigating between elements",
                     "type": "boolean"
                 },
                 "id": {
@@ -13606,6 +13618,10 @@
                 "persistState": {
                     "description": "Indicates if the platform should save state when navigating between elements",
                     "type": "boolean"
+                },
+                "persistValues": {
+                    "description": "Indicates if the platform should save values when navigating between elements",
+                    "type": "boolean"
                 }
             }
         },
@@ -13620,6 +13636,10 @@
                 },
                 "persistState": {
                     "description": "Indicates if the platform should save state when navigating between elements",
+                    "type": "boolean"
+                },
+                "persistValues": {
+                    "description": "Indicates if the platform should save values when navigating between elements",
                     "type": "boolean"
                 }
             }
@@ -13908,6 +13928,10 @@
                     "additionalProperties": {
                         "type": "string"
                     }
+                },
+                "className": {
+                    "description": "A space separated string of CSS classes to be applied to the component when rendering.",
+                    "type": "string"
                 }
             }
         },
