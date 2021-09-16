@@ -4236,6 +4236,26 @@
             }
         },
         "/api/features/1/tenant": {
+            "get": {
+                "tags": [
+                    "Features Features"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/FeatureFlagAPI"
+                            }
+                        }
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "Features Features"
@@ -10024,7 +10044,13 @@
                 "valueElementToApplyDeveloperName": {
                     "type": "string"
                 },
+                "valueElementToApplyPropertyDeveloperName": {
+                    "type": "string"
+                },
                 "valueElementToReferenceDeveloperName": {
+                    "type": "string"
+                },
+                "valueElementToReferencePropertyDeveloperName": {
                     "type": "string"
                 },
                 "valueElementToApplyCommand": {
@@ -10042,16 +10068,25 @@
                 "valueElementToApplyContentType": {
                     "type": "string"
                 },
+                "valueElementToApplyPropertyContentType": {
+                    "type": "string"
+                },
                 "valueElementToApplyTypeElementId": {
                     "type": "string"
                 },
                 "valueElementToReferenceContentType": {
                     "type": "string"
                 },
+                "valueElementToReferencePropertyContentType": {
+                    "type": "string"
+                },
                 "valueElementToReferenceTypeElementId": {
                     "type": "string"
                 },
-                "valueElementToApplySortBy": {
+                "valueElementToApplySortById": {
+                    "type": "string"
+                },
+                "valueElementToApplySortByDeveloperName": {
                     "type": "string"
                 },
                 "valueElementToApplySortDirection": {
@@ -10441,12 +10476,15 @@
                     "type": "string"
                 },
                 "locationMapElementDeveloperName": {
+                    "description": "The name of the map element that the navigation item should point to based on this override.",
                     "type": "string"
                 },
                 "navigationElementDeveloperName": {
+                    "description": "The name of the navigation being referenced.",
                     "type": "string"
                 },
                 "navigationItemDeveloperName": {
+                    "description": "The name of the navigation item in the navigation being referenced.",
                     "type": "string"
                 }
             }
@@ -10549,6 +10587,11 @@
                 },
                 "userContent": {
                     "description": "The content that should be shown to the user at this step in the Flow. This property should only be used for very simple Flows and informational UI. For anything more than simple messaging, use the Page and associate it with this Map Element using the pageElementId property.",
+                    "type": "string"
+                },
+                "userContentDateModified": {
+                    "format": "date-time",
+                    "description": "The date the Map Elements usercontent was modified.",
                     "type": "string"
                 },
                 "statusMessage": {
@@ -12043,6 +12086,11 @@
                 },
                 "userContent": {
                     "description": "The content that should be shown to the user at this step in the Flow. This property should only be used for very simple Flows and informational UI. For anything more than simple messaging, use the Page and associate it with this Map Element using the pageElementId property.",
+                    "type": "string"
+                },
+                "userContentDateModified": {
+                    "format": "date-time",
+                    "description": "The date the Map Elements usercontent was modified.",
                     "type": "string"
                 },
                 "statusMessage": {
