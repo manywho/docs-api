@@ -9618,6 +9618,10 @@
                 "returnValuesOnJump": {
                     "description": "Indicates if on jumping specified by the selectedMapElementPath property (so called \"long jump\"), the Engine should return value elements to the parent",
                     "type": "boolean"
+                },
+                "flowDeveloperName": {
+                    "description": "The developer name of the flow that is called as subflow",
+                    "type": "string"
                 }
             }
         },
@@ -9639,6 +9643,9 @@
                     "type": "integer"
                 },
                 "pageElementId": {
+                    "type": "string"
+                },
+                "pageElementDeveloperName": {
                     "type": "string"
                 },
                 "outcomes": {
@@ -10629,6 +10636,9 @@
                     "type": "integer"
                 },
                 "pageElementId": {
+                    "type": "string"
+                },
+                "pageElementDeveloperName": {
                     "type": "string"
                 },
                 "outcomes": {
@@ -12128,6 +12138,9 @@
                     "type": "integer"
                 },
                 "pageElementId": {
+                    "type": "string"
+                },
+                "pageElementDeveloperName": {
                     "type": "string"
                 },
                 "outcomes": {
