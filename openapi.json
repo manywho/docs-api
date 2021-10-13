@@ -1821,7 +1821,7 @@
         "/api/dashboard/1/flow/{id}": {
             "get": {
                 "tags": [
-                    "Dashboard"
+                    "Dashboard Dashboard"
                 ],
                 "summary": "List number of launches (States) for a Flow",
                 "produces": [
@@ -10851,6 +10851,67 @@
                 }
             }
         },
+        "PageComponentValidationType": {
+            "format": "int32",
+            "enum": [
+                0,
+                1,
+                2
+            ],
+            "type": "integer"
+        },
+        "DoubleStringValueElementIdAPIOneOf": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "object",
+                    "readOnly": true
+                },
+                "index": {
+                    "format": "int32",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "isT0": {
+                    "type": "boolean",
+                    "readOnly": true
+                },
+                "isT1": {
+                    "type": "boolean",
+                    "readOnly": true
+                },
+                "isT2": {
+                    "type": "boolean",
+                    "readOnly": true
+                },
+                "asT0": {
+                    "format": "double",
+                    "type": "number",
+                    "readOnly": true
+                },
+                "asT1": {
+                    "type": "string",
+                    "readOnly": true
+                },
+                "asT2": {
+                    "$ref": "#/definitions/ValueElementIdAPI"
+                }
+            }
+        },
+        "PageComponentValidationAPI": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/PageComponentValidationType"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "value": {
+                    "$ref": "#/definitions/DoubleStringValueElementIdAPIOneOf"
+                }
+            }
+        },
         "PageComponentAPI": {
             "type": "object",
             "properties": {
@@ -10966,6 +11027,12 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/PageTagAPI"
+                    }
+                },
+                "validations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PageComponentValidationAPI"
                     }
                 },
                 "className": {
@@ -15360,6 +15427,10 @@
             "x-displayName": "Audit"
         },
         {
+            "name": "Dashboard Dashboard",
+            "x-displayName": "Dashboard"
+        },
+        {
             "name": "Draw Assets",
             "x-displayName": "Assets"
         },
@@ -15525,6 +15596,12 @@
             "name": "Audit",
             "tags": [
                 "Audit Audit"
+            ]
+        },
+        {
+            "name": "Dashboard",
+            "tags": [
+                "Dashboard Dashboard"
             ]
         },
         {
