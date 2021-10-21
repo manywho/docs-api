@@ -4170,13 +4170,6 @@
                     },
                     {
                         "in": "query",
-                        "name": "includeSystemValues",
-                        "description": "Optional. Whether to include system values",
-                        "type": "boolean",
-                        "default": true
-                    },
-                    {
-                        "in": "query",
                         "name": "search",
                         "description": "Optional. A search term to filter the results by",
                         "type": "string"
