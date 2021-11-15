@@ -2562,7 +2562,7 @@
                     "Draw Flow Snapshot"
                 ],
                 "summary": "Revert a Flow Snapshot",
-                "description": "Used to take an flow snapshot and apply it to the current flow being modelled. This is equivalent to undoing\r\nchanges to a flow for all flow builders.\r\n\r\nTo revert a flow snapshot for running users, simply activate and make default the appropriate previous flow\r\nsnapshot version.\r\n\r\n<aside class=\"alert alert-warning\">\r\nIf the flow being actively edited by other flow builders does not have a flow snapshot, all changes will be\r\nlost. The platform can only recover old flow versions from snapshots.\r\n</aside>",
+                "description": "Used to take an flow snapshot and apply it to the current flow being modelled. This is equivalent to undoing\r\nchanges to a flow for all flow builders.\r\n            \r\nTo revert a flow snapshot for running users, simply activate and make default the appropriate previous flow\r\nsnapshot version.\r\n            \r\n<aside class=\"alert alert-warning\">\r\nIf the flow being actively edited by other flow builders does not have a flow snapshot, all changes will be\r\nlost. The platform can only recover old flow versions from snapshots.\r\n</aside>",
                 "parameters": [
                     {
                         "in": "path",
@@ -8482,6 +8482,10 @@
                 },
                 "macros": {
                     "description": "Indicates if all macro elements should be deleted",
+                    "type": "boolean"
+                },
+                "openApiSchemas": {
+                    "description": "Indicates if all cached OpenAPI Schemas should be deleted",
                     "type": "boolean"
                 }
             }
@@ -15443,7 +15447,7 @@
         },
         {
             "name": "Draw Authentication",
-            "description": "_Authenticate flow builders before using the Admin, Draw, Packaging and Translate APIs_\r\n\r\nOnce a tenant and flow builder have been provisioned, you can authenticate using the Draw API. The returned\r\ntoken should be used in the standard HTTP `Authorization` header when performing any operations against the\r\nvarious supported APIs.",
+            "description": "_Authenticate flow builders before using the Admin, Draw, Packaging and Translate APIs_\r\n            \r\nOnce a tenant and flow builder have been provisioned, you can authenticate using the Draw API. The returned\r\ntoken should be used in the standard HTTP `Authorization` header when performing any operations against the\r\nvarious supported APIs.",
             "x-displayName": "Authentication"
         },
         {
@@ -15462,7 +15466,7 @@
         },
         {
             "name": "Draw Flow Snapshot",
-            "description": "_The flow snapshot is the package that is sent to the platform runtime engine._\r\n\r\nWithout a flow snapshot, a flow cannot be accessed by running users. The flow snapshot contains all the fully\r\nversioned elements that are needed for the flow to execute (excluding subflows). In the tooling, each time a\r\nflow is run or published, a flow snapshot is taken. This means you then have a version of the flow that can also\r\nbe reverted if flow builders make a range of mistakes and would like to go back to a previous snapshot.\r\n\r\nThe flow snapshot also acts as a version system as all metadata for the flow can be accessed, and external tools\r\ncan be used to diff for changes. Equally, for compliance, a customer can access the flow snapshots to get a\r\ncomplete picture of which flow the running user(s) were running at any particular point in time.",
+            "description": "_The flow snapshot is the package that is sent to the platform runtime engine._\r\n            \r\nWithout a flow snapshot, a flow cannot be accessed by running users. The flow snapshot contains all the fully\r\nversioned elements that are needed for the flow to execute (excluding subflows). In the tooling, each time a\r\nflow is run or published, a flow snapshot is taken. This means you then have a version of the flow that can also\r\nbe reverted if flow builders make a range of mistakes and would like to go back to a previous snapshot.\r\n            \r\nThe flow snapshot also acts as a version system as all metadata for the flow can be accessed, and external tools\r\ncan be used to diff for changes. Equally, for compliance, a customer can access the flow snapshots to get a\r\ncomplete picture of which flow the running user(s) were running at any particular point in time.",
             "x-displayName": "Flow Snapshot"
         },
         {
