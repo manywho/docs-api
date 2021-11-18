@@ -15430,7 +15430,7 @@
         },
         {
             "name": "Admin Users",
-            "description": "_Users provide basic information about flow builders and running users in a tenant_\r\n\r\nUsers on the platform are identified via their email. As a result, the email address determines who the user is.\r\nThe email address is the unique identifier across the entire platform. When running users access a flow, a user\r\nis provisioned into the tenant on-demand. In addition, flow builders are included in the user listing.",
+            "description": "_Users provide basic information about flow builders and running users in a tenant_\r\n            \r\nUsers on the platform are identified via their email. As a result, the email address determines who the user is.\r\nThe email address is the unique identifier across the entire platform. When running users access a flow, a user\r\nis provisioned into the tenant on-demand. In addition, flow builders are included in the user listing.",
             "x-displayName": "Users"
         },
         {
