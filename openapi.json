@@ -817,7 +817,7 @@
                     "Admin Tenants and Subtenants"
                 ],
                 "summary": "Load Tenant",
-                "description": "Used to get the tenant object for the current tenant. Tenants provide a central place for flow builders to \r\nbuild, manage and deploy flows.",
+                "description": "Used to get the tenant object for the current tenant. Tenants provide a central place for flow builders to\r\nbuild, manage and deploy flows.",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -1513,6 +1513,68 @@
                 }
             }
         },
+        "/api/admin/1/organization/invites/tenants/cancel/{id}": {
+            "patch": {
+                "tags": [
+                    "AdminOrganizationInviteTenants"
+                ],
+                "summary": "Cancel Tenant Invitation",
+                "description": "Cancels a pending invitation for a tenant to join an organization.",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The ID of the tenant the invite was sent to.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationInvite"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/1/organization/invites/tenants/acknowledge/{id}": {
+            "patch": {
+                "tags": [
+                    "AdminOrganizationInviteTenants"
+                ],
+                "summary": "Acknowledge Tenant Invitation Rejection",
+                "description": "Acknowledges the rejection of an invitation for a tenant to join an organization.",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The ID of the tenant the invite was sent to.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationInvite"
+                        }
+                    }
+                }
+            }
+        },
         "/api/admin/1/organization/invites/users": {
             "get": {
                 "tags": [
@@ -1610,6 +1672,68 @@
                         "in": "path",
                         "name": "id",
                         "description": "The ID of the organization the invite came from",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationInvite"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/1/organization/invites/users/cancel/{id}": {
+            "patch": {
+                "tags": [
+                    "AdminOrganizationInviteUsers"
+                ],
+                "summary": "Cancel User Invitation",
+                "description": "Cancels a pending invitation for a user to join an organization",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The ID of the tenant the invite was sent to.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/OrganizationInvite"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/1/organization/invites/users/acknowledge/{id}": {
+            "patch": {
+                "tags": [
+                    "AdminOrganizationInviteUsers"
+                ],
+                "summary": "Cancel User Invitation",
+                "description": "Acknowledges the rejection of an invitation for a user to join an organization",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The ID of the tenant the invite was sent to.",
                         "required": true,
                         "type": "string",
                         "format": "uuid"
@@ -4213,6 +4337,65 @@
                             "items": {
                                 "$ref": "#/definitions/ValueElementIdReferenceAPI"
                             }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/draw/2/element/page": {
+            "get": {
+                "tags": [
+                    "DrawElementPage2"
+                ],
+                "summary": "List Page Elements",
+                "description": "Used to list and filter existing page elements.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "filter",
+                        "description": "The filter used for querying",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "description": "The current page of flow states",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 1
+                    },
+                    {
+                        "in": "query",
+                        "name": "pageSize",
+                        "description": "The number of flow states to return",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 20
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderBy",
+                        "description": "The column to order the results by",
+                        "type": "string",
+                        "default": "dateModified"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderDirection",
+                        "description": "The direction the order will use",
+                        "type": "string",
+                        "default": "DESC"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/PageElementResponseAPIItemCollectionResponse"
                         }
                     }
                 }
@@ -8777,7 +8960,7 @@
                     "type": "string"
                 },
                 "status": {
-                    "description": "The current status of the invitation. Can be one of \"invited\", \"accepted\" or \"rejected\".",
+                    "description": "The current status of the invitation. Can be one of \"invited\", \"accepted\", \"rejected\", \"canceled\", or \"acknowledged\".",
                     "type": "string"
                 },
                 "tenant": {
@@ -11049,6 +11232,26 @@
                 "className": {
                     "description": "A space separated string of CSS classes to be applied to the component when rendering.",
                     "type": "string"
+                },
+                "row": {
+                    "format": "int32",
+                    "description": "Row position of a grid item (component).",
+                    "type": "integer"
+                },
+                "column": {
+                    "format": "int32",
+                    "description": "Column position of a grid item (component).",
+                    "type": "integer"
+                },
+                "rowSpan": {
+                    "format": "int32",
+                    "description": "Size of a grid item (component) measured in rows.",
+                    "type": "integer"
+                },
+                "colSpan": {
+                    "format": "int32",
+                    "description": "Size of a grid item (component) measured in columns.",
+                    "type": "integer"
                 }
             }
         },
@@ -11243,6 +11446,10 @@
                 },
                 "updateByName": {
                     "description": "Indicates if the platform should attempt to find a page element with the same developer name as the one\r\nprovided and match them up by name as opposed to by ID. This is useful when creating scripts to create\r\nflows, as you can use the <code>developerName</code> property as the reference as opposed to needing to\r\nknow the IDs of all created elements.",
+                    "type": "boolean"
+                },
+                "modernPageLayout": {
+                    "description": "Indicates if the page is using the modern layout based on the CSS grid.",
                     "type": "boolean"
                 },
                 "id": {
@@ -12372,6 +12579,10 @@
                     "description": "Indicates if the platform should attempt to find a page element with the same developer name as the one\r\nprovided and match them up by name as opposed to by ID. This is useful when creating scripts to create\r\nflows, as you can use the <code>developerName</code> property as the reference as opposed to needing to\r\nknow the IDs of all created elements.",
                     "type": "boolean"
                 },
+                "modernPageLayout": {
+                    "description": "Indicates if the page is using the modern layout based on the CSS grid.",
+                    "type": "boolean"
+                },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
                     "type": "string"
@@ -12949,6 +13160,30 @@
                 "command": {
                     "description": "The command to execute as part of the Value reference. For certain objects, the command exposes additional properties that can be referenced.",
                     "type": "string"
+                }
+            }
+        },
+        "PageElementResponseAPIItemCollectionResponse": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                },
+                "links": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PageElementResponseAPI"
+                    },
+                    "readOnly": true
                 }
             }
         },
@@ -14071,6 +14306,26 @@
                 "className": {
                     "description": "A space separated string of CSS classes to be applied to the component when rendering.",
                     "type": "string"
+                },
+                "row": {
+                    "format": "int32",
+                    "description": "Row position of a grid item (component).",
+                    "type": "integer"
+                },
+                "column": {
+                    "format": "int32",
+                    "description": "Column position of a grid item (component).",
+                    "type": "integer"
+                },
+                "rowSpan": {
+                    "format": "int32",
+                    "description": "Size of a grid item (component) measured in rows.",
+                    "type": "integer"
+                },
+                "colSpan": {
+                    "format": "int32",
+                    "description": "Size of a grid item (component) measured in columns.",
+                    "type": "integer"
                 }
             }
         },
