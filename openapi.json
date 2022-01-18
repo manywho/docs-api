@@ -3,7 +3,7 @@
     "info": {
         "title": "Boomi Flow",
         "version": "v1",
-        "description": "# Boomi Flow API\r\n\r\nThis API reference provides information on the available endpoints in the Boomi Flow REST API, including parameters and response data format.\r\n\r\nAs Boomi Flow is based on an <a href=\"http://help.boomi.com/csh?context=GUID-b7cbf7a7-bcd0-4d1c-b926-69854df699ec\" target=\"_blank\">API-first architecture</a>, many of the operations performed within Boomi Flow can be accessed through this API. \r\n\r\nBefore you can start using the API, you will need to create a Boomi Flow account.\r\n\r\n## Making a request to the API\r\n\r\nAPI endpoint requests should be appended to the Boomi Flow API Host at:\r\n\r\n- flow.boomi.com\r\n\r\nFor example:\r\n\r\nGET **<span>ht</span>tps://flow.boomi.com**/api/draw/1/flow\r\n\r\n> **NOTE:**  The <a href=\"http://help.boomi.com/csh?context=GUID-95ad682d-ce04-494a-9235-e113a89406bc\" target=\"_blank\">API tool</a> in Boomi Flow allows you to automatically authorize and interact with the API within the Boomi Flow application.\r\n\r\n# Authentication\r\n\r\nThe API supports authorization using either an API Key or an **Authorization** header.\r\n\r\nAPI keys are specific to a tenant, meaning that each API key only authenticates you for the tenant selected when generating the API key.\r\n\r\nYou can <a href=\"http://help.boomi.com/csh?context=GUID-7c393c4c-2193-40ee-b0aa-ef148c5b423c\" target=\"_blank\">manage your API keys</a> on the Boomi Flow **User Settings** page.\r\n\r\n> **NOTE:**  When making requests to the API, you may also need to include a **manywhotenant** header referencing the tenant ID value that the API key is associated with.\r\n\r\n## Authentication using an API Key\r\n\r\nTo use an API Key to authenticate requests to the Boomi Flow API:\r\n\r\n 1. <a href=\"http://help.boomi.com/csh?context=GUID-fab6941c-d8a2-433a-a2f2-6782eb873a02\" target=\"_blank\">Generate an API Key</a> in Boomi Flow, or by sending a POST request to the **api/admin/1/users/me/keys** endpoint. \r\n  \r\n 2. Add a **x-boomi-flow-api-key** header to your API requests instead of an Authorization header, to authenticate as yourself. This header should contain only the **apiKey** value of the API Key.\r\n\r\n3. If required, add a **manywhotenant** header referencing the tenant ID value that the API key is associated with.\r\n\r\n## Authentication using an Authorization header\r\n\r\nTo use an Authorization header:\r\n\r\n 1. Obtain a token by sending a POST request to the **api/draw/1/authentication** endpoint.\r\n \r\n 2. Insert the returned token into the standard HTTP **Authorization** header when performing any operations against the various supported APIs.\r\n"
+        "description": "# Boomi Flow API\n\nThis API reference provides information on the available endpoints in the Boomi Flow REST API, including parameters and response data format.\n\nAs Boomi Flow is based on an <a href=\"http://help.boomi.com/csh?context=GUID-b7cbf7a7-bcd0-4d1c-b926-69854df699ec\" target=\"_blank\">API-first architecture</a>, many of the operations performed within Boomi Flow can be accessed through this API. \n\nBefore you can start using the API, you will need to create a Boomi Flow account.\n\n## Making a request to the API\n\nAPI endpoint requests should be appended to the Boomi Flow API Host at:\n\n- flow.boomi.com\n\nFor example:\n\nGET **<span>ht</span>tps://flow.boomi.com**/api/draw/1/flow\n\n> **NOTE:**  The <a href=\"http://help.boomi.com/csh?context=GUID-95ad682d-ce04-494a-9235-e113a89406bc\" target=\"_blank\">API tool</a> in Boomi Flow allows you to automatically authorize and interact with the API within the Boomi Flow application.\n\n# Authentication\n\nThe API supports authorization using either an API Key or an **Authorization** header.\n\nAPI keys are specific to a tenant, meaning that each API key only authenticates you for the tenant selected when generating the API key.\n\nYou can <a href=\"http://help.boomi.com/csh?context=GUID-7c393c4c-2193-40ee-b0aa-ef148c5b423c\" target=\"_blank\">manage your API keys</a> on the Boomi Flow **User Settings** page.\n\n> **NOTE:**  When making requests to the API, you may also need to include a **manywhotenant** header referencing the tenant ID value that the API key is associated with.\n\n## Authentication using an API Key\n\nTo use an API Key to authenticate requests to the Boomi Flow API:\n\n 1. <a href=\"http://help.boomi.com/csh?context=GUID-fab6941c-d8a2-433a-a2f2-6782eb873a02\" target=\"_blank\">Generate an API Key</a> in Boomi Flow, or by sending a POST request to the **api/admin/1/users/me/keys** endpoint. \n  \n 2. Add a **x-boomi-flow-api-key** header to your API requests instead of an Authorization header, to authenticate as yourself. This header should contain only the **apiKey** value of the API Key.\n\n3. If required, add a **manywhotenant** header referencing the tenant ID value that the API key is associated with.\n\n## Authentication using an Authorization header\n\nTo use an Authorization header:\n\n 1. Obtain a token by sending a POST request to the **api/draw/1/authentication** endpoint.\n \n 2. Insert the returned token into the standard HTTP **Authorization** header when performing any operations against the various supported APIs.\n"
     },
     "paths": {
         "/api/admin/1/provisioning": {
@@ -26,7 +26,38 @@
                         "name": "body",
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/TenantRegistrationAPI"
+                            "$ref": "#/definitions/TenantRegistrationRequestAPI"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/admin/2/provisioning": {
+            "post": {
+                "tags": [
+                    "Admin Provisioning"
+                ],
+                "summary": "Provision a Tenant",
+                "description": "This endpoint requests the provisioning of a new tenant, and also creates a new user if one doesn't exist with the given email\r\naddress. If an apiKeyName is provided an API Key will also be created for the new tenant.",
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/TenantRegistrationRequestAPI"
                         }
                     }
                 ],
@@ -3016,6 +3047,115 @@
                 }
             }
         },
+        "/api/draw/1/element/identityprovider": {
+            "post": {
+                "tags": [
+                    "Draw Identity Provider"
+                ],
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityProviderAPI"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityProviderAPI"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Draw Identity Provider"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "filter",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/IdentityProviderAPI"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/draw/1/element/identityprovider/{id}": {
+            "get": {
+                "tags": [
+                    "Draw Identity Provider"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityProviderAPI"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Draw Identity Provider"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/draw/1/element/macro": {
             "post": {
                 "tags": [
@@ -4086,6 +4226,65 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/draw/2/element/type": {
+            "get": {
+                "tags": [
+                    "Draw Type Element"
+                ],
+                "summary": "List Type Elements",
+                "description": "Used to list and filter existing type elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "filter",
+                        "description": "The filter used for querying",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Optional. Restrict the number of returned results. Zero is no limit",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 20
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "description": "Optional. The current page of types",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 1
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderBy",
+                        "description": "Optional. Specify which field to order results by. Default is dateModified",
+                        "type": "string",
+                        "default": "dateModified"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderDirection",
+                        "description": "Optional. Specify which direction results should be ordered by. Can either be ASC or DESC. Default is DESC.",
+                        "type": "string",
+                        "default": "DESC"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/TypeElementResponseAPIItemCollectionResponse"
+                        }
                     }
                 }
             }
@@ -5426,13 +5625,40 @@
                 }
             }
         },
+        "/api/run/2/saml": {
+            "post": {
+                "tags": [
+                    "Run Run"
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "SAMLResponse",
+                        "type": "string"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "RelayState",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/run/1/authentication/{stateId}": {
             "get": {
                 "tags": [
                     "Run Run"
                 ],
                 "summary": "Get Authentication Context",
-                "description": "When you initialize a Flow, you are provided with the authentication context in the response.\r\n\r\nHowever, you can also retrieve and login to Services individually.\r\n\r\nIt’s important to note that despite authentication being done against a Flow state, the returned Runtime Authentication Token is valid across all Flow States.",
+                "description": "When you initialize a Flow, you are provided with the authentication context in the response.\r\n            \r\nHowever, you can also retrieve and login to Services individually.\r\n            \r\nIt’s important to note that despite authentication being done against a Flow state, the returned Runtime Authentication Token is valid across all Flow States.",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -5586,7 +5812,7 @@
                     "Run Run"
                 ],
                 "summary": "Flow Out",
-                "description": "Initiate a flow out from an Outcome that is configured with a Flow Out.\r\n\r\n<aside class=\"alert alert-info\">\r\nIf the flow out state is already running, it will be joined.\r\n\r\nOtherwise, it will be initialised.\r\n</aside>",
+                "description": "Initiate a flow out from an Outcome that is configured with a Flow Out.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the flow out state is already running, it will be joined.\r\n            \r\nOtherwise, it will be initialised.\r\n</aside>",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -5661,7 +5887,7 @@
                     "Run Run"
                 ],
                 "summary": "Initialize a Flow (Simple)",
-                "description": "Used to initialise a flow and authenitcate into it.\r\n\r\n<aside class=\"alert alert-info\">\r\nEither a flow ID or developer name must be provided to initialize a flow.\r\n</aside>",
+                "description": "Used to initialise a flow and authenitcate into it.\r\n            \r\n<aside class=\"alert alert-info\">\r\nEither a flow ID or developer name must be provided to initialize a flow.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -5961,7 +6187,7 @@
                     "Run Run"
                 ],
                 "summary": "Export State",
-                "description": "Used to export a state from the tenant into JSON.\r\n\r\n<aside class=\"alert alert-info\">\r\nUsers only have permissions to export States for which they are the Running User.\r\n</aside>",
+                "description": "Used to export a state from the tenant into JSON.\r\n            \r\n<aside class=\"alert alert-info\">\r\nUsers only have permissions to export States for which they are the Running User.\r\n</aside>",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -7053,11 +7279,14 @@
         }
     },
     "definitions": {
-        "TenantRegistrationAPI": {
+        "TenantRegistrationRequestAPI": {
             "type": "object",
             "properties": {
                 "tenantName": {
                     "description": "The name of the tenant to create",
+                    "type": "string"
+                },
+                "apiKeyName": {
                     "type": "string"
                 },
                 "firstName": {
@@ -8667,6 +8896,9 @@
                     "description": "Indicates if all macro elements should be deleted",
                     "type": "boolean"
                 },
+                "identityProviders": {
+                    "type": "boolean"
+                },
                 "openApiSchemas": {
                     "description": "Indicates if all cached OpenAPI Schemas should be deleted",
                     "type": "boolean"
@@ -9462,6 +9694,27 @@
                 }
             }
         },
+        "FlowIdentityProviderAPI": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "allowedUsers": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "allowedGroups": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
         "FlowRequestAPI": {
             "type": "object",
             "properties": {
@@ -9506,6 +9759,9 @@
                 },
                 "restrictions": {
                     "$ref": "#/definitions/FlowRestrictionsAPI"
+                },
+                "identityProvider": {
+                    "$ref": "#/definitions/FlowIdentityProviderAPI"
                 }
             }
         },
@@ -9588,6 +9844,9 @@
                 },
                 "restrictions": {
                     "$ref": "#/definitions/FlowRestrictionsAPI"
+                },
+                "identityProvider": {
+                    "$ref": "#/definitions/FlowIdentityProviderAPI"
                 }
             }
         },
@@ -9913,6 +10172,9 @@
                     "description": "Is the Group open in the buildtime editor. default: true",
                     "type": "boolean"
                 },
+                "identityProvider": {
+                    "$ref": "#/definitions/FlowIdentityProviderAPI"
+                },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
                     "type": "string"
@@ -9998,6 +10260,9 @@
                 },
                 "restrictions": {
                     "$ref": "#/definitions/FlowRestrictionsAPI"
+                },
+                "identityProvider": {
+                    "$ref": "#/definitions/FlowIdentityProviderAPI"
                 }
             }
         },
@@ -10067,6 +10332,9 @@
                 },
                 "restrictions": {
                     "$ref": "#/definitions/FlowRestrictionsAPI"
+                },
+                "identityProvider": {
+                    "$ref": "#/definitions/FlowIdentityProviderAPI"
                 }
             }
         },
@@ -10919,6 +11187,9 @@
                 "isOpen": {
                     "description": "Is the Group open in the buildtime editor. default: true",
                     "type": "boolean"
+                },
+                "identityProvider": {
+                    "$ref": "#/definitions/FlowIdentityProviderAPI"
                 },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
@@ -12222,6 +12493,9 @@
                 },
                 "restrictions": {
                     "$ref": "#/definitions/FlowRestrictionsAPI"
+                },
+                "identityProvider": {
+                    "$ref": "#/definitions/FlowIdentityProviderAPI"
                 }
             }
         },
@@ -12262,6 +12536,57 @@
                 "isOpen": {
                     "description": "Is the Group open in the buildtime editor. default: true",
                     "type": "boolean"
+                },
+                "identityProvider": {
+                    "$ref": "#/definitions/FlowIdentityProviderAPI"
+                },
+                "id": {
+                    "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
+                    "type": "string"
+                },
+                "elementType": {
+                    "description": "The type of element this metadata represents.",
+                    "type": "string"
+                },
+                "developerName": {
+                    "description": "The developer name for the element. This is useful for keeping track of the element in the modelling tool and the API.",
+                    "type": "string"
+                },
+                "developerSummary": {
+                    "description": "The developer summary the author provided to give more information about the element",
+                    "type": "string"
+                },
+                "whoCreated": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                },
+                "whoModified": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                },
+                "whoOwner": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                }
+            }
+        },
+        "IdentityProviderType": {
+            "format": "int32",
+            "enum": [
+                0
+            ],
+            "type": "integer"
+        },
+        "IdentityProviderAPI": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/IdentityProviderType"
+                },
+                "dateCreated": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "dateModified": {
+                    "format": "date-time",
+                    "type": "string"
                 },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
@@ -13019,6 +13344,30 @@
                 }
             }
         },
+        "TypeElementResponseAPIItemCollectionResponse": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                },
+                "links": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TypeElementResponseAPI"
+                    },
+                    "readOnly": true
+                }
+            }
+        },
         "ValueElementRequestAPI": {
             "type": "object",
             "properties": {
@@ -13319,6 +13668,12 @@
                     }
                 },
                 "valueElements": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PackageElement"
+                    }
+                },
+                "identityProviderElements": {
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/PackageElement"
@@ -15730,6 +16085,10 @@
             "x-displayName": "Group Element"
         },
         {
+            "name": "Draw Identity Provider",
+            "x-displayName": "Identity Provider"
+        },
+        {
             "name": "Draw Macro Element",
             "x-displayName": "Macro Element"
         },
@@ -15880,6 +16239,7 @@
                 "Draw Flow Graph",
                 "Draw Flow Snapshot",
                 "Draw Group Element",
+                "Draw Identity Provider",
                 "Draw Macro Element",
                 "Draw Map Element",
                 "Draw Navigation Element",
