@@ -4419,6 +4419,74 @@
                 }
             }
         },
+        "/api/draw/2/element/value": {
+            "get": {
+                "tags": [
+                    "Draw Value Element"
+                ],
+                "summary": "List Value Elements",
+                "description": "Used to list and filter existing value elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "filter",
+                        "description": "The filter used for querying",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "contentType",
+                        "description": "Optional. One or more content types to filter by",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Optional. Restrict the number of returned results. Zero is no limit",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 20
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "description": "Optional. The current page of types",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 1
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderBy",
+                        "description": "Optional. Specify which field to order results by. Default is dateModified",
+                        "type": "string",
+                        "default": "dateModified"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderDirection",
+                        "description": "Optional. Specify which direction results should be ordered by. Can either be ASC or DESC. Default is DESC.",
+                        "type": "string",
+                        "default": "DESC"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ValueElementResponseAPIItemCollectionResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/draw/1/element/value/reference": {
             "get": {
                 "tags": [
@@ -13445,6 +13513,30 @@
                 },
                 "whoOwner": {
                     "$ref": "#/definitions/BuilderWhoAPI"
+                }
+            }
+        },
+        "ValueElementResponseAPIItemCollectionResponse": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                },
+                "links": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ValueElementResponseAPI"
+                    },
+                    "readOnly": true
                 }
             }
         },
