@@ -8747,48 +8747,6 @@
                 }
             }
         },
-        "RestrictionAPI": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "description": "Indicates that the restriction is enabled",
-                    "type": "boolean"
-                },
-                "countries": {
-                    "description": "The list of countries that are permitted by the restriction.\r\nA single country must be represented as its 2-letter country code (according to ISO 3166-1 alpha-2)",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "continents": {
-                    "description": "The list of continents that are permitted by the restriction\r\nA single contintent must be represetend as its 2-letter code.",
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            }
-        },
-        "FlowRestrictionsAPI": {
-            "type": "object",
-            "properties": {
-                "execution": {
-                    "$ref": "#/definitions/RestrictionAPI"
-                },
-                "access": {
-                    "$ref": "#/definitions/RestrictionAPI"
-                }
-            }
-        },
-        "TenantRestrictionsAPI": {
-            "type": "object",
-            "properties": {
-                "flowRestrictions": {
-                    "$ref": "#/definitions/FlowRestrictionsAPI"
-                }
-            }
-        },
         "FeatureFlagAPI": {
             "type": "object",
             "properties": {
@@ -8852,7 +8810,7 @@
                     "$ref": "#/definitions/SecuritySettingsAPI"
                 },
                 "subdomain": {
-                    "description": "The requested subdomain to register for this tenant. If provided, the subdomain must be unique for the \r\nentire platform",
+                    "description": "The requested subdomain to register for this tenant. If provided, the subdomain must be unique for the\r\nentire platform",
                     "type": "string"
                 },
                 "stateSettings": {
@@ -8866,9 +8824,6 @@
                 },
                 "externalStorageSettings": {
                     "$ref": "#/definitions/ExternalStorageSettingsAPI"
-                },
-                "restrictions": {
-                    "$ref": "#/definitions/TenantRestrictionsAPI"
                 },
                 "featureFlags": {
                     "description": "Feature Flags related to the tenant",
@@ -8894,7 +8849,7 @@
                     "$ref": "#/definitions/SecuritySettingsAPI"
                 },
                 "subdomain": {
-                    "description": "The requested subdomain to register for this tenant. If provided, the subdomain must be unique for the \r\nentire platform",
+                    "description": "The requested subdomain to register for this tenant. If provided, the subdomain must be unique for the\r\nentire platform",
                     "type": "string"
                 },
                 "stateSettings": {
@@ -8908,9 +8863,6 @@
                 },
                 "externalStorageSettings": {
                     "$ref": "#/definitions/ExternalStorageSettingsAPI"
-                },
-                "restrictions": {
-                    "$ref": "#/definitions/TenantRestrictionsAPI"
                 },
                 "featureFlags": {
                     "description": "Feature Flags related to the tenant",
@@ -9825,9 +9777,6 @@
                 "authorization": {
                     "$ref": "#/definitions/GroupAuthorizationAPI"
                 },
-                "restrictions": {
-                    "$ref": "#/definitions/FlowRestrictionsAPI"
-                },
                 "identityProvider": {
                     "$ref": "#/definitions/FlowIdentityProviderAPI"
                 }
@@ -9909,9 +9858,6 @@
                 },
                 "authorization": {
                     "$ref": "#/definitions/GroupAuthorizationAPI"
-                },
-                "restrictions": {
-                    "$ref": "#/definitions/FlowRestrictionsAPI"
                 },
                 "identityProvider": {
                     "$ref": "#/definitions/FlowIdentityProviderAPI"
@@ -10326,9 +10272,6 @@
                 "authorization": {
                     "$ref": "#/definitions/GroupAuthorizationAPI"
                 },
-                "restrictions": {
-                    "$ref": "#/definitions/FlowRestrictionsAPI"
-                },
                 "identityProvider": {
                     "$ref": "#/definitions/FlowIdentityProviderAPI"
                 }
@@ -10397,9 +10340,6 @@
                 },
                 "authorization": {
                     "$ref": "#/definitions/GroupAuthorizationAPI"
-                },
-                "restrictions": {
-                    "$ref": "#/definitions/FlowRestrictionsAPI"
                 },
                 "identityProvider": {
                     "$ref": "#/definitions/FlowIdentityProviderAPI"
@@ -12558,9 +12498,6 @@
                 },
                 "authorization": {
                     "$ref": "#/definitions/GroupAuthorizationAPI"
-                },
-                "restrictions": {
-                    "$ref": "#/definitions/FlowRestrictionsAPI"
                 },
                 "identityProvider": {
                     "$ref": "#/definitions/FlowIdentityProviderAPI"
