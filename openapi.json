@@ -3,7 +3,7 @@
     "info": {
         "title": "Boomi Flow",
         "version": "v1",
-        "description": "# Boomi Flow API\n\nThis API reference provides information on the available endpoints in the Boomi Flow REST API, including parameters and response data format.\n\nAs Boomi Flow is based on an <a href=\"http://help.boomi.com/csh?context=GUID-b7cbf7a7-bcd0-4d1c-b926-69854df699ec\" target=\"_blank\">API-first architecture</a>, many of the operations performed within Boomi Flow can be accessed through this API. \n\nBefore you can start using the API, you will need to create a Boomi Flow account.\n\n## Making a request to the API\n\nAPI endpoint requests should be appended to the Boomi Flow API Host at:\n\n- flow.boomi.com\n\nFor example:\n\nGET **<span>ht</span>tps://flow.boomi.com**/api/draw/1/flow\n\n> **NOTE:**  The <a href=\"http://help.boomi.com/csh?context=GUID-95ad682d-ce04-494a-9235-e113a89406bc\" target=\"_blank\">API tool</a> in Boomi Flow allows you to automatically authorize and interact with the API within the Boomi Flow application.\n\n# Authentication\n\nThe API supports authorization using either an API Key or an **Authorization** header.\n\nAPI keys are specific to a tenant, meaning that each API key only authenticates you for the tenant selected when generating the API key.\n\nYou can <a href=\"http://help.boomi.com/csh?context=GUID-7c393c4c-2193-40ee-b0aa-ef148c5b423c\" target=\"_blank\">manage your API keys</a> on the Boomi Flow **User Settings** page.\n\n> **NOTE:**  When making requests to the API, you may also need to include a **manywhotenant** header referencing the tenant ID value that the API key is associated with.\n\n## Authentication using an API Key\n\nTo use an API Key to authenticate requests to the Boomi Flow API:\n\n 1. <a href=\"http://help.boomi.com/csh?context=GUID-fab6941c-d8a2-433a-a2f2-6782eb873a02\" target=\"_blank\">Generate an API Key</a> in Boomi Flow, or by sending a POST request to the **api/admin/1/users/me/keys** endpoint. \n  \n 2. Add a **x-boomi-flow-api-key** header to your API requests instead of an Authorization header, to authenticate as yourself. This header should contain only the **apiKey** value of the API Key.\n\n3. If required, add a **manywhotenant** header referencing the tenant ID value that the API key is associated with.\n\n## Authentication using an Authorization header\n\nTo use an Authorization header:\n\n 1. Obtain a token by sending a POST request to the **api/draw/1/authentication** endpoint.\n \n 2. Insert the returned token into the standard HTTP **Authorization** header when performing any operations against the various supported APIs.\n"
+        "description": "# Boomi Flow API\r\n\r\nThis API reference provides information on the available endpoints in the Boomi Flow REST API, including parameters and response data format.\r\n\r\nAs Boomi Flow is based on an <a href=\"http://help.boomi.com/csh?context=GUID-b7cbf7a7-bcd0-4d1c-b926-69854df699ec\" target=\"_blank\">API-first architecture</a>, many of the operations performed within Boomi Flow can be accessed through this API. \r\n\r\nBefore you can start using the API, you will need to create a Boomi Flow account.\r\n\r\n## Making a request to the API\r\n\r\nAPI endpoint requests should be appended to the Boomi Flow API Host at:\r\n\r\n- flow.boomi.com\r\n\r\nFor example:\r\n\r\nGET **https://flow.boomi.com/api/draw/1/flow**\r\n\r\n> **NOTE:**  The <a href=\"http://help.boomi.com/csh?context=GUID-95ad682d-ce04-494a-9235-e113a89406bc\" target=\"_blank\">API tool</a> in Boomi Flow allows you to automatically authorize and interact with the API within the Boomi Flow application.\r\n\r\n# Authentication\r\n\r\nThe API supports authorization using an API Key .\r\n\r\nAPI keys are specific to a tenant, meaning that each API key only authenticates you for the tenant selected when generating the API key.\r\n\r\nYou can <a href=\"http://help.boomi.com/csh?context=GUID-7c393c4c-2193-40ee-b0aa-ef148c5b423c\" target=\"_blank\">manage your API keys</a> on the Boomi Flow **User Settings** page.\r\n\r\n## Authentication using an API Key\r\n\r\nTo use an API Key to authenticate requests to the Boomi Flow API:\r\n\r\n 1. <a href=\"http://help.boomi.com/csh?context=GUID-fab6941c-d8a2-433a-a2f2-6782eb873a02\" target=\"_blank\">Generate an API Key</a> in Boomi Flow, or by sending a POST request to the **api/admin/1/users/me/keys** endpoint. \r\n  \r\n 2. Add a **x-boomi-flow-api-key** header to your API requests instead of an Authorization header, to authenticate as yourself. This header should contain only the **apiKey** value of the API Key.\r\n\r\n3. If required, add a **manywhotenant** header referencing the tenant ID value that the API key is associated with.\r\n\r\n\r\n"
     },
     "paths": {
         "/api/admin/1/provisioning": {
@@ -633,215 +633,6 @@
                 }
             }
         },
-        "/api/admin/1/stores": {
-            "get": {
-                "tags": [
-                    "Admin Stores"
-                ],
-                "summary": "List Stores",
-                "description": "Returns a list of stores in the current tenant.",
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/StoreListResponse"
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Admin Stores"
-                ],
-                "summary": "Create Store",
-                "description": "Creates a new store, generating an ID, a keypair for encrypting incoming API requests and a keypair for\r\nensuring payload integrity.",
-                "consumes": [
-                    "",
-                    "application/json-patch+json",
-                    "application/json",
-                    "text/json",
-                    "application/*+json"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Details to use when creating the store",
-                        "schema": {
-                            "$ref": "#/definitions/StoreCreateRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/StoreCreateResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/admin/1/stores/{id}": {
-            "get": {
-                "tags": [
-                    "Admin Stores"
-                ],
-                "summary": "Find Store",
-                "description": "Finds a store by ID, in the current tenant.",
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The ID of the store to find",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/StoreListResponse"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Admin Stores"
-                ],
-                "summary": "Delete Store",
-                "description": "Delete a store from the current tenant. This instantly invalidates any keys from the store that are still\r\nin-use.",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The ID of the store to delete",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Admin Stores"
-                ],
-                "summary": "Update Store",
-                "description": "Updates a store by ID, in the current tenant.",
-                "consumes": [
-                    "",
-                    "application/json-patch+json",
-                    "application/json",
-                    "text/json",
-                    "application/*+json"
-                ],
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The ID of the store to update",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "The properties of the store to update",
-                        "schema": {
-                            "$ref": "#/definitions/StoreUpdateRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/StoreListResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/admin/1/stores/migrations": {
-            "post": {
-                "tags": [
-                    "Admin Stores"
-                ],
-                "summary": "Migrates data to Store",
-                "description": "Starts a migration of data from the current tenant into the selected store.",
-                "consumes": [
-                    "",
-                    "application/json-patch+json",
-                    "application/json",
-                    "text/json",
-                    "application/*+json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "The properties of the migration",
-                        "schema": {
-                            "$ref": "#/definitions/StoreMigrateRequest"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success"
-                    }
-                }
-            },
-            "get": {
-                "tags": [
-                    "Admin Stores"
-                ],
-                "summary": "Used to list all the store migrations, ordered by the creation date",
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/StoreMigrationStatus"
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/api/admin/1/tenant": {
             "get": {
                 "tags": [
@@ -1266,8 +1057,8 @@
                 "tags": [
                     "Admin Users"
                 ],
-                "summary": "Load the Current User's settings",
-                "description": "Load the settings for the currently-authenticated user",
+                "summary": "Load the Current User's Tenant settings",
+                "description": "Load the tenant user settings for the currently-authenticated user",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -1285,8 +1076,8 @@
                 "tags": [
                     "Admin Users"
                 ],
-                "summary": "Update the Current User's settings",
-                "description": "Update the settings for the currently-authenticated user",
+                "summary": "Update the Current User's Tenant settings",
+                "description": "Update the tenant user settings for the currently-authenticated user",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -1397,6 +1188,61 @@
                 "responses": {
                     "200": {
                         "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/admin/1/users/me/user-settings": {
+            "get": {
+                "tags": [
+                    "Admin Users"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/UserSettingsAPI"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Admin Users"
+                ],
+                "summary": "Update the Current User's settings",
+                "description": "Update the settings for the currently-authenticated user",
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/UserSettingsAPI"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/UserSettingsAPI"
+                        }
                     }
                 }
             }
@@ -2156,36 +2002,6 @@
                 }
             }
         },
-        "/api/draw/1/authentication/{tenant}": {
-            "get": {
-                "tags": [
-                    "Draw Authentication"
-                ],
-                "summary": "Switch Tenant",
-                "produces": [
-                    "application/json",
-                    "text/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "tenant",
-                        "description": "The ID of the tenant to authenticate into",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/api/draw/1/authentication/saml/{tenant}": {
             "get": {
                 "tags": [
@@ -2361,7 +2177,7 @@
                     "Draw Flow"
                 ],
                 "summary": "Create/Update Flow",
-                "description": "Used to create new flows or update existing ones. The flow object represents an entire flow application.\r\n\r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the flow with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe flow with the matching <code>developerName</code> property.\r\n</aside>",
+                "description": "Used to create new flows or update existing ones. The flow object represents an entire flow application.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the flow with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe flow with the matching <code>developerName</code> property.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -2397,7 +2213,7 @@
                     "Draw Flow"
                 ],
                 "summary": "List Flows",
-                "description": "Used to list and filter existing flows.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of flows where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of flows where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to list and filter existing flows.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of flows where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of flows where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -2660,6 +2476,89 @@
                 }
             }
         },
+        "/api/draw/1/graph/flow/{flow}/elements/load": {
+            "post": {
+                "tags": [
+                    "Draw Flow Graph"
+                ],
+                "summary": "Get Flow Elements",
+                "description": "Used to get map or group elements within the flow graph. The response will contain all information\r\nabout the map and group elements, not just basic configuration information.",
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "flow",
+                        "description": "The unique identifier for the flow",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The list of map or group element ids to load",
+                        "schema": {
+                            "$ref": "#/definitions/FlowGraphElementIDRequestAPI"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/FlowGraphElementResponseAPI"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/draw/1/graph/flow/{flow}/elements/save": {
+            "post": {
+                "tags": [
+                    "Draw Flow Graph"
+                ],
+                "summary": "Save Flow Elements",
+                "description": "Used to save map or group elements within the flow graph. It is expected that all the information about\r\nthe map and group elements has been given, not just basic configuration information.",
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "flow",
+                        "description": "The unique identifier for the flow",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The list of map or group elements to save",
+                        "schema": {
+                            "$ref": "#/definitions/FlowGraphElementRequestAPI"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/draw/1/flow/activation/{flow}/{version}/{isDefault}/{isActivated}": {
             "post": {
                 "tags": [
@@ -2868,7 +2767,7 @@
                     "Draw Group Element"
                 ],
                 "summary": "Create/Update Group Element",
-                "description": "Used to create new group elements or update existing ones.\r\n\r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
+                "description": "Used to create new group elements or update existing ones.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -2920,7 +2819,7 @@
                     "Draw Group Element"
                 ],
                 "summary": "List Group Elements",
-                "description": "Used to list and filter existing group elements.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to list and filter existing group elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -3094,16 +2993,39 @@
                         "in": "query",
                         "name": "filter",
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 20
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 1
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderBy",
+                        "type": "string",
+                        "default": "dateModified"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderDirection",
+                        "type": "string",
+                        "default": "DESC"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Success",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/IdentityProviderAPI"
-                            }
+                            "$ref": "#/definitions/IdentityProviderAPIItemCollectionResponse"
                         }
                     }
                 }
@@ -3156,13 +3078,41 @@
                 }
             }
         },
+        "/api/identityprovider/1/{tenantId}/{id}/saml/metadata": {
+            "get": {
+                "tags": [
+                    "Draw Identity Provider"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenantId",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/draw/1/element/macro": {
             "post": {
                 "tags": [
                     "Draw Macro Element"
                 ],
                 "summary": "Create/Update Macro Elements",
-                "description": "Used to create new macro elements or update existing ones.\r\n\r\n<aside class=\"alert alert-info\"> \r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
+                "description": "Used to create new macro elements or update existing ones.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -3198,7 +3148,7 @@
                     "Draw Macro Element"
                 ],
                 "summary": "List Macro Elements",
-                "description": "Used to list and filter existing macro elements.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to list and filter existing macro elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -3283,7 +3233,7 @@
                     "Draw Map Element"
                 ],
                 "summary": "Create/Update Map Elements",
-                "description": "Used to create new map elements or update existing ones.\r\n\r\n<aside class=\"alert alert-info\"> \r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
+                "description": "Used to create new map elements or update existing ones.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -3335,7 +3285,7 @@
                     "Draw Map Element"
                 ],
                 "summary": "List Map Elements",
-                "description": "Used to filter existing map elements.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to filter existing map elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -3468,7 +3418,7 @@
                     "Draw Navigation Element"
                 ],
                 "summary": "Create/Update Navigation Elements",
-                "description": "Used to create new navigation elements or update existing ones.\r\n\r\n<aside class=\"alert alert-info\"> \r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
+                "description": "Used to create new navigation elements or update existing ones.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -3520,7 +3470,7 @@
                     "Draw Navigation Element"
                 ],
                 "summary": "List Navigation Elements",
-                "description": "Used to filter existing navigation elements.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to filter existing navigation elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -3653,7 +3603,7 @@
                     "Draw Page Element"
                 ],
                 "summary": "Create/Update Page Elements",
-                "description": "Used to create new page elements or update existing ones.\r\n\r\n<aside class=\"alert alert-info\"> \r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
+                "description": "Used to create new page elements or update existing ones.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -3689,7 +3639,7 @@
                     "Draw Page Element"
                 ],
                 "summary": "List Page Elements",
-                "description": "Used to list and filter existing page elements.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to list and filter existing page elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -3850,7 +3800,7 @@
                     "Draw Service Element"
                 ],
                 "summary": "Create/Update Service Elements",
-                "description": "Used to create new service elements or update existing ones.\r\n\r\n<aside class=\"alert alert-info\"> \r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
+                "description": "Used to create new service elements or update existing ones.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -3886,7 +3836,7 @@
                     "Draw Service Element"
                 ],
                 "summary": "List Service Elements",
-                "description": "Used to list and filter existing service elements.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to list and filter existing service elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -3965,13 +3915,72 @@
                 }
             }
         },
+        "/api/draw/2/element/service": {
+            "get": {
+                "tags": [
+                    "Draw Service Element"
+                ],
+                "summary": "List Service Elements v2",
+                "description": "Used to list and filter existing Service elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "filter",
+                        "description": "The filter used for querying",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "page",
+                        "description": "Optional. The current page of Services",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 1
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Optional. Restrict the number of returned results. Zero is no limit. 20 is the default",
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 20
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderBy",
+                        "description": "Optional. Specify which field to order results by. Default is dateModified",
+                        "type": "string",
+                        "default": "dateModified"
+                    },
+                    {
+                        "in": "query",
+                        "name": "orderDirection",
+                        "description": "Optional. Specify which direction results should be ordered by. Can either be ASC or DESC. Default is DESC.",
+                        "type": "string",
+                        "default": "DESC"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ServiceElementResponseAPIItemCollectionResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/draw/1/element/tag": {
             "post": {
                 "tags": [
                     "Draw Tag Element"
                 ],
                 "summary": "Create/Update Tag Elements",
-                "description": "Used to create new tag elements or update existing ones.\r\n\r\n<aside class=\"alert alert-info\"> \r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
+                "description": "Used to create new tag elements or update existing ones.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the element with a\r\nmatching ID. If the <code>updateByName</code> property is set to <code>true</code>, the platform will update\r\nthe element with the matching <code>developerName</code> property.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -4007,7 +4016,7 @@
                     "Draw Tag Element"
                 ],
                 "summary": "List Tag Elements",
-                "description": "Used to list and filter existing tag elements.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to list and filter existing tag elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -4242,6 +4251,16 @@
                     "text/json"
                 ],
                 "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "description": "",
+                        "type": "array",
+                        "items": {
+                            "format": "uuid",
+                            "type": "string"
+                        }
+                    },
                     {
                         "in": "query",
                         "name": "filter",
@@ -4615,7 +4634,7 @@
                     "DrawElementPage2"
                 ],
                 "summary": "List Page Elements",
-                "description": "Used to list and filter existing page elements.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to list and filter existing page elements.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of elements where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of elements where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -4664,6 +4683,118 @@
                         "schema": {
                             "$ref": "#/definitions/PageElementResponseAPIItemCollectionResponse"
                         }
+                    }
+                }
+            }
+        },
+        "/api/environment/1": {
+            "post": {
+                "tags": [
+                    "Environment Environment"
+                ],
+                "summary": "Saves an environment",
+                "description": "Edits an existing environment",
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/EnvironmentAPI"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/EnvironmentAPI"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Environment Environment"
+                ],
+                "summary": "Get environments",
+                "description": "Gets all environments for the tenant the user is logged into",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/EnvironmentAPI"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/environment/1/{id}": {
+            "get": {
+                "tags": [
+                    "Environment Environment"
+                ],
+                "summary": "Get environment",
+                "description": "Gets an environment by Id",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/EnvironmentAPI"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Environment Environment"
+                ],
+                "summary": "Delete an environment",
+                "description": "Deletes an environment with the given Id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
                     }
                 }
             }
@@ -4890,6 +5021,59 @@
                         "schema": {
                             "type": "string"
                         }
+                    }
+                }
+            }
+        },
+        "/api/package/1/tenant": {
+            "get": {
+                "tags": [
+                    "Package Package"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "nullPasswords",
+                        "type": "boolean",
+                        "default": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Package Package"
+                ],
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
                     }
                 }
             }
@@ -5283,8 +5467,7 @@
                         "in": "path",
                         "name": "tenantId",
                         "required": true,
-                        "type": "string",
-                        "format": "uuid"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -5317,8 +5500,7 @@
                         "in": "path",
                         "name": "tenantId",
                         "required": true,
-                        "type": "string",
-                        "format": "uuid"
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -5330,6 +5512,190 @@
                                 "type": "string"
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/release/1": {
+            "post": {
+                "tags": [
+                    "Release Release"
+                ],
+                "summary": "Saves a release",
+                "description": "Saves a new or edits an existing release",
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "$ref": "#/definitions/ReleaseAPI"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ReleaseAPI"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Release Release"
+                ],
+                "summary": "Get releases",
+                "description": "Gets all releases for the tenant the user is logged into",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ReleaseAPI"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/release/1/{id}": {
+            "get": {
+                "tags": [
+                    "Release Release"
+                ],
+                "summary": "Get release",
+                "description": "Gets a release by Id",
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/ReleaseAPI"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Release Release"
+                ],
+                "summary": "Delete a release",
+                "description": "Deletes a release with the given Id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/release/1/{id}/flow/{flowId}/version/{versionId}": {
+            "put": {
+                "tags": [
+                    "Release Release"
+                ],
+                "summary": "Add flow",
+                "description": "Adds a flow to a release",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "in": "path",
+                        "name": "flowId",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "in": "path",
+                        "name": "versionId",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/release/1/{id}/flow/{flowId}": {
+            "delete": {
+                "tags": [
+                    "Release Release"
+                ],
+                "summary": "Delete release flow",
+                "description": "Removes the flow from the release",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "in": "path",
+                        "name": "flowId",
+                        "description": "",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
                     }
                 }
             }
@@ -5720,6 +6086,54 @@
                 }
             }
         },
+        "/api/run/1/oidc": {
+            "get": {
+                "tags": [
+                    "Run Run"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "state",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "code",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/run/2/oauth2": {
+            "get": {
+                "tags": [
+                    "Run Run"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "state",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "code",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/run/1/authentication/{stateId}": {
             "get": {
                 "tags": [
@@ -6061,6 +6475,81 @@
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/EngineInvokeResponseAPI"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/run/2/state/{stateId}": {
+            "post": {
+                "tags": [
+                    "Run Run"
+                ],
+                "summary": "Invoke Flow State",
+                "description": "Used to invoke a flow state",
+                "consumes": [
+                    "",
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "stateId",
+                        "description": "The unique identifier of the Flow state.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/EngineInvokeRequestAPI"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/EngineInvokeResponse2API"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Run Run"
+                ],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "stateId",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "mode",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/EngineInvokeResponse2API"
                         }
                     }
                 }
@@ -6518,6 +7007,44 @@
                 }
             }
         },
+        "/api/run/1/state/{stateId}/download/{fileId}/{filename}": {
+            "get": {
+                "tags": [
+                    "Run Run"
+                ],
+                "summary": "Download document",
+                "description": "Downloads the octet stream of a document stored in the Flow internal storage",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "stateId",
+                        "description": "The unique identifier of the Flow state.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    {
+                        "in": "path",
+                        "name": "fileId",
+                        "description": "The id of the document",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "path",
+                        "name": "filename",
+                        "description": "The chosen name of the document that is returned",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/api/service/1/requests": {
             "get": {
                 "tags": [
@@ -6798,7 +7325,7 @@
                     "Translate Cultures"
                 ],
                 "summary": "Create/Update Content Value Culture",
-                "description": "Used to create new content value cultures or update existing ones.\r\n\r\n<aside class=\"alert alert-info\"> \r\nIf the <code>id</code> property is included in the request, the platform will update the culture with a\r\nmatching ID.\r\n</aside>",
+                "description": "Used to create new content value cultures or update existing ones.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIf the <code>id</code> property is included in the request, the platform will update the culture with a\r\nmatching ID.\r\n</aside>",
                 "consumes": [
                     "",
                     "application/json-patch+json",
@@ -6909,7 +7436,7 @@
                     "Translate Flow"
                 ],
                 "summary": "List Flow Translations",
-                "description": "Used to filter existing flow objects that are available for translation.\r\n\r\n### Filter\r\n\r\nThe filter can take the following formats:\r\n\r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of flows where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of flows where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
+                "description": "Used to filter existing flow objects that are available for translation.\r\n            \r\n### Filter\r\n            \r\nThe filter can take the following formats:\r\n            \r\n* <code>developerName eq '{developer_name}'</code>: Filter the list of flows where the <code>developerName</code> property exactly matches the provided developer name (case insensitive)\r\n* <code>substringof(developerName, '{developer_name}')</code>: Filter the list of flows where the <code>developerName</code> property partially matches the provided developer name (case insensitive)",
                 "produces": [
                     "application/json",
                     "text/json"
@@ -7586,6 +8113,10 @@
                     "readOnly": true
                 },
                 "isIPv6Teredo": {
+                    "type": "boolean",
+                    "readOnly": true
+                },
+                "isIPv6UniqueLocal": {
                     "type": "boolean",
                     "readOnly": true
                 },
@@ -8303,6 +8834,10 @@
                     "items": {
                         "$ref": "#/definitions/ArchivedStackFrameAPI"
                     }
+                },
+                "waitExpiresAt": {
+                    "format": "date-time",
+                    "type": "string"
                 }
             }
         },
@@ -8367,148 +8902,6 @@
                         "$ref": "#/definitions/StateFlowResponseAPI"
                     },
                     "readOnly": true
-                }
-            }
-        },
-        "StoreListResponse": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "uuid",
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "endpoint": {
-                    "type": "string"
-                },
-                "platformKey": {
-                    "type": "string"
-                },
-                "createdAt": {
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "format": "date-time",
-                    "type": "string"
-                }
-            }
-        },
-        "StoreAuthentication": {
-            "type": "object",
-            "properties": {
-                "basicUsername": {
-                    "description": "The endpoint's username for Basic HTTP Authentication",
-                    "type": "string"
-                },
-                "basicPassword": {
-                    "description": "The endpoint's password for Basic HTTP Authentication",
-                    "type": "string"
-                }
-            }
-        },
-        "StoreCreateRequest": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "A descriptive name of the store",
-                    "type": "string"
-                },
-                "endpoint": {
-                    "description": "The endpoint the store is hosted at, which must support HTTPS.",
-                    "type": "string"
-                },
-                "authentication": {
-                    "$ref": "#/definitions/StoreAuthentication"
-                }
-            }
-        },
-        "StoreCreateResponse": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "uuid",
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "endpoint": {
-                    "type": "string"
-                },
-                "platformKey": {
-                    "type": "string"
-                },
-                "receiverKey": {
-                    "type": "string"
-                }
-            }
-        },
-        "StoreUpdateRequest": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "description": "A descriptive name of the store",
-                    "type": "string"
-                },
-                "endpoint": {
-                    "description": "The endpoint the store is hosted at, which must support HTTPS.",
-                    "type": "string"
-                },
-                "authentication": {
-                    "$ref": "#/definitions/StoreAuthentication"
-                }
-            }
-        },
-        "StoreMigrateRequest": {
-            "type": "object",
-            "properties": {
-                "storeId": {
-                    "format": "uuid",
-                    "description": "The id of the store where data will be migrated to",
-                    "type": "string"
-                },
-                "batchSize": {
-                    "format": "int32",
-                    "description": "A size of batch that will be used to save states during migration",
-                    "type": "integer"
-                }
-            }
-        },
-        "StoreMigrationStatus": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "uuid",
-                    "type": "string"
-                },
-                "storeId": {
-                    "format": "uuid",
-                    "type": "string"
-                },
-                "userId": {
-                    "format": "uuid",
-                    "type": "string"
-                },
-                "status": {
-                    "type": "string"
-                },
-                "errorCause": {
-                    "type": "string"
-                },
-                "startedAt": {
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "updatedAt": {
-                    "format": "date-time",
-                    "type": "string"
-                },
-                "endedAt": {
-                    "format": "date-time",
-                    "type": "string"
                 }
             }
         },
@@ -8699,6 +9092,11 @@
                 "otlpHeaders": {
                     "description": "A comma-separated string of headers to send with each dispatch",
                     "type": "string"
+                },
+                "otlpSensitiveDataLogging": {
+                    "format": "int32",
+                    "description": "When this is enabled more verbose and potentially sensitive information will be logged",
+                    "type": "integer"
                 }
             }
         },
@@ -8797,6 +9195,9 @@
                 },
                 "organization": {
                     "$ref": "#/definitions/OrganizationMinimal"
+                },
+                "parentTenant": {
+                    "$ref": "#/definitions/TenantResponseAPI"
                 },
                 "developerName": {
                     "description": "The unique developer name for the tenant. The developer name is related to the domain information provided in the builder username.",
@@ -9071,6 +9472,16 @@
                 },
                 "organization": {
                     "$ref": "#/definitions/OrganizationMinimal"
+                },
+                "roleId": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "isSso": {
+                    "type": "boolean"
                 }
             }
         },
@@ -9186,6 +9597,26 @@
                 },
                 "lastName": {
                     "type": "string"
+                }
+            }
+        },
+        "CanvasSettings": {
+            "type": "object",
+            "properties": {
+                "lineThickness": {
+                    "format": "float",
+                    "type": "number"
+                },
+                "mapElementColorStyle": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserSettingsAPI": {
+            "type": "object",
+            "properties": {
+                "canvasSettings": {
+                    "$ref": "#/definitions/CanvasSettings"
                 }
             }
         },
@@ -10041,6 +10472,10 @@
                     "additionalProperties": {
                         "type": "string"
                     }
+                },
+                "className": {
+                    "description": "A space separated string of CSS classes to be applied to the outcome when rendering.",
+                    "type": "string"
                 }
             }
         },
@@ -10092,6 +10527,40 @@
                 }
             }
         },
+        "WaitAPI": {
+            "type": "object",
+            "properties": {
+                "days": {
+                    "format": "int32",
+                    "description": "The number of days this wait is configured to wait for before proceeding.",
+                    "type": "integer"
+                },
+                "hours": {
+                    "format": "int32",
+                    "description": "The number of hours this wait is configured to wait for before proceeding.",
+                    "type": "integer"
+                },
+                "minutes": {
+                    "format": "int32",
+                    "description": "The number of minutes this wait is configured to wait for before proceeding.",
+                    "type": "integer"
+                },
+                "seconds": {
+                    "format": "int32",
+                    "description": "The number of seconds this wait is configured to wait for before proceeding.",
+                    "type": "integer"
+                },
+                "relative": {
+                    "description": "The time to wait expressed as a phrase relative to the current time at execution. Such as \"In 2 days\"",
+                    "type": "string"
+                },
+                "absoluteDate": {
+                    "format": "date-time",
+                    "description": "A fixed date and time whereafter the wait will be deemed complete.",
+                    "type": "string"
+                }
+            }
+        },
         "MapElementAPI": {
             "type": "object",
             "properties": {
@@ -10124,6 +10593,9 @@
                 },
                 "subflow": {
                     "$ref": "#/definitions/SubflowAPI"
+                },
+                "wait": {
+                    "$ref": "#/definitions/WaitAPI"
                 },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
@@ -10346,150 +10818,52 @@
                 }
             }
         },
-        "PageTagAPI": {
+        "FlowGraphElementIDRequestAPI": {
             "type": "object",
             "properties": {
-                "valueElementToReferenceId": {
-                    "$ref": "#/definitions/ValueElementIdAPI"
-                },
-                "tagElementId": {
-                    "description": "The unique identifier for the Tag that this tag is associated. This Tag will be used to provide the Tag name at runtime and also ensure Tag content and object type references are maintained.",
-                    "type": "string"
-                }
-            }
-        },
-        "ValueToResetAPI": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "format": "uuid",
-                    "description": "The reference to the Value that should be reset.",
-                    "type": "string"
-                },
-                "resetType": {
-                    "description": "The mode for resetting the value e.g CLEAR or DEFAULT_VALUE",
-                    "type": "string"
-                }
-            }
-        },
-        "NavigationItemAPI": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "description": "The unique identifier for the NavigationItem. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests. This property is created by the service.",
-                    "type": "string"
-                },
-                "locationMapElementId": {
-                    "description": "The unique identifier for the Map Element that this NavigationItem \"points\" to.",
-                    "type": "string"
-                },
-                "developerName": {
-                    "description": "The developer name for the Navigation. This is useful for keeping track of the Navigation in the modeling tool and API.",
-                    "type": "string"
-                },
-                "developerSummary": {
-                    "description": "The developer summary the author provided to give more information about the Navigation.",
-                    "type": "string"
-                },
-                "label": {
-                    "description": "The label to display the user.",
-                    "type": "string"
-                },
-                "navigationItems": {
-                    "description": "The navigation items that are available for this NavigationItem. The navigation items are the \"links\" the user can use to navigate around your Flow.",
+                "mapElementIds": {
+                    "description": "An array of map elements ids that exist in the flow graph.",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/NavigationItemAPI"
+                        "type": "string"
                     }
                 },
-                "order": {
+                "groupElementIds": {
+                    "description": "An array of group elements ids that exist in the flow graph.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "DoubleValueElementIdAPIOneOf": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "object",
+                    "readOnly": true
+                },
+                "index": {
                     "format": "int32",
-                    "description": "The order in which this NavigationItem should appear in relation to other sibling NavigationItems.",
-                    "type": "integer"
+                    "type": "integer",
+                    "readOnly": true
                 },
-                "tags": {
-                    "description": "The list of tags that are associated with this NavigationItem.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/PageTagAPI"
-                    }
+                "isT0": {
+                    "type": "boolean",
+                    "readOnly": true
                 },
-                "valuesToReset": {
-                    "description": "The list of values to reset that are associated with this navigation.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ValueToResetAPI"
-                    }
-                }
-            }
-        },
-        "NavigationElementResponseAPI": {
-            "type": "object",
-            "properties": {
-                "dateCreated": {
-                    "format": "date-time",
-                    "description": "The date the Navigation was first created.",
-                    "type": "string"
+                "isT1": {
+                    "type": "boolean",
+                    "readOnly": true
                 },
-                "dateModified": {
-                    "format": "date-time",
-                    "description": "The date the last modification was made to the Navigation.",
-                    "type": "string"
+                "asT0": {
+                    "format": "double",
+                    "type": "number",
+                    "readOnly": true
                 },
-                "whoCreated": {
-                    "$ref": "#/definitions/BuilderWhoAPI"
-                },
-                "whoModified": {
-                    "$ref": "#/definitions/BuilderWhoAPI"
-                },
-                "whoOwner": {
-                    "$ref": "#/definitions/BuilderWhoAPI"
-                },
-                "label": {
-                    "description": "The label to display to the user.",
-                    "type": "string"
-                },
-                "navigationItems": {
-                    "description": "The navigation items that are available for this navigation. The navigation items are the \"links\" the user\r\ncan use to navigate around your flow.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/NavigationItemAPI"
-                    }
-                },
-                "tags": {
-                    "description": "The list of tags that are associated with this navigation.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/PageTagAPI"
-                    }
-                },
-                "updateByName": {
-                    "description": "Indicates if the platform should attempt to find a navigation with the same developer name as the one\r\nprovided and match them up by name as opposed to by ID. This is useful when creating scripts to create\r\nflows, as you can use the <code>developerName</code> property as the reference as opposed to needing to know\r\nthe IDs of all created elements.",
-                    "type": "boolean"
-                },
-                "persistState": {
-                    "description": "Indicates if the platform should save state when navigating between elements",
-                    "type": "boolean"
-                },
-                "persistValues": {
-                    "description": "Indicates if the platform should save values when navigating between elements",
-                    "type": "boolean"
-                },
-                "id": {
-                    "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
-                    "type": "string"
-                },
-                "elementType": {
-                    "description": "The type of element this metadata represents.",
-                    "type": "string"
-                },
-                "developerName": {
-                    "description": "The developer name for the element. This is useful for keeping track of the element in the modelling tool and the API.",
-                    "type": "string"
-                },
-                "developerSummary": {
-                    "description": "The developer summary the author provided to give more information about the element",
-                    "type": "string"
+                "asT1": {
+                    "$ref": "#/definitions/ValueElementIdAPI"
                 }
             }
         },
@@ -10500,7 +10874,7 @@
                     "$ref": "#/definitions/ValueElementIdAPI"
                 },
                 "valueElementToReferenceId": {
-                    "$ref": "#/definitions/ValueElementIdAPI"
+                    "$ref": "#/definitions/DoubleValueElementIdAPIOneOf"
                 },
                 "macroElementToExecuteId": {
                     "description": "The macro that should be executed for this operation.",
@@ -10709,6 +11083,9 @@
                 "disabled": {
                     "description": "Whether the message action is disabled or not",
                     "type": "boolean"
+                },
+                "selectedOutcomeId": {
+                    "type": "string"
                 }
             }
         },
@@ -11121,6 +11498,9 @@
                 "subflow": {
                     "$ref": "#/definitions/SubflowAPI"
                 },
+                "wait": {
+                    "$ref": "#/definitions/WaitAPI"
+                },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
                     "type": "string"
@@ -11198,6 +11578,399 @@
                 },
                 "identityProvider": {
                     "$ref": "#/definitions/FlowIdentityProviderAPI"
+                },
+                "id": {
+                    "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
+                    "type": "string"
+                },
+                "elementType": {
+                    "description": "The type of element this metadata represents.",
+                    "type": "string"
+                },
+                "developerName": {
+                    "description": "The developer name for the element. This is useful for keeping track of the element in the modelling tool and the API.",
+                    "type": "string"
+                },
+                "developerSummary": {
+                    "description": "The developer summary the author provided to give more information about the element",
+                    "type": "string"
+                }
+            }
+        },
+        "FlowGraphElementResponseAPI": {
+            "type": "object",
+            "properties": {
+                "mapElements": {
+                    "description": "An array of map elements that are part of the flow graph.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MapElementResponseAPI"
+                    }
+                },
+                "groupElements": {
+                    "description": "An array of group elements that are part of the flow graph.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GroupElementResponseAPI"
+                    }
+                }
+            }
+        },
+        "MapElementRequestAPI": {
+            "type": "object",
+            "properties": {
+                "operations": {
+                    "description": "The list of operations that should be performed when this Map Element executes. Operations are used to change the value of Values in the executing Flow (State).",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OperationAPI"
+                    }
+                },
+                "listeners": {
+                    "description": "The list of listeners that should be registered when this Map Element executes.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ListenerAPI"
+                    }
+                },
+                "viewMessageAction": {
+                    "$ref": "#/definitions/MessageActionAPI"
+                },
+                "messageActions": {
+                    "description": "The list of message actions that should be executed when this Map Element executes. The message action objects define the interface of inputs/outputs for calling against each Service message.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MessageActionAPI"
+                    }
+                },
+                "dataActions": {
+                    "description": "The list of data actions that should be executed when this map element executes. The data action objects\r\ndefine the values and bindings that should be used to perform CRUD operations against each service and value.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/DataActionAPI"
+                    }
+                },
+                "navigationOverrides": {
+                    "description": "The list of navigation overrides that should be applied when this Map Element executes.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NavigationOverrideAPI"
+                    }
+                },
+                "vote": {
+                    "$ref": "#/definitions/VoteAPI"
+                },
+                "clearNavigationOverrides": {
+                    "type": "boolean"
+                },
+                "postUpdateToStream": {
+                    "description": "Indicates if this Map Element should post an update to the collaboration stream.",
+                    "type": "boolean"
+                },
+                "userContent": {
+                    "description": "The content that should be shown to the user at this step in the Flow. This property should only be used for very simple Flows and informational UI. For anything more than simple messaging, use the Page and associate it with this Map Element using the pageElementId property.",
+                    "type": "string"
+                },
+                "userContentDateModified": {
+                    "format": "date-time",
+                    "description": "The date the Map Elements usercontent was modified.",
+                    "type": "string"
+                },
+                "statusMessage": {
+                    "description": "The content that should be shown to the user while waiting for a system step to complete.",
+                    "type": "string"
+                },
+                "postUpdateMessage": {
+                    "description": "The content of the message that should be posted to the collaboration stream.",
+                    "type": "string"
+                },
+                "notAuthorizedMessage": {
+                    "description": "The content that should be shown to the user if they are not authorized to take action on this Map Element.",
+                    "type": "string"
+                },
+                "postUpdateWhenType": {
+                    "description": "The point at which the post should be made to the collaboration stream.",
+                    "type": "string"
+                },
+                "updateByName": {
+                    "description": "Indicates if the platform should attempt to find a Type with the same developer name as the one provided and match them up by name as opposed to 'id'. This is useful when creating scripts to create Flows - as you can use the developerName property as the reference as opposed to needing to know the ids of all created Elements.",
+                    "type": "boolean"
+                },
+                "groupElementId": {
+                    "description": "The unique identifier for the Group that contains this Map Element. If a Map Element is inside a Group, it inherits certain behaviors of the parent Group. For example, a Swimlane Group wraps all child Map Elements in a security context.",
+                    "type": "string"
+                },
+                "x": {
+                    "format": "int32",
+                    "description": "The x location of the Map Element on the Flow diagram.",
+                    "type": "integer"
+                },
+                "y": {
+                    "format": "int32",
+                    "description": "The y location of the Map Element on the Flow diagram.",
+                    "type": "integer"
+                },
+                "pageElementId": {
+                    "type": "string"
+                },
+                "pageElementDeveloperName": {
+                    "type": "string"
+                },
+                "outcomes": {
+                    "description": "The list of outcomes that are available for this Map Element. An Outcome is used to connect the flow of execution from one Map Element in the Flow to another. An Outcome can take the form of a Page button, but also define system steps such as rules.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OutcomeAPI"
+                    }
+                },
+                "subflow": {
+                    "$ref": "#/definitions/SubflowAPI"
+                },
+                "wait": {
+                    "$ref": "#/definitions/WaitAPI"
+                },
+                "id": {
+                    "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
+                    "type": "string"
+                },
+                "elementType": {
+                    "description": "The type of element this metadata represents.",
+                    "type": "string"
+                },
+                "developerName": {
+                    "description": "The developer name for the element. This is useful for keeping track of the element in the modelling tool and the API.",
+                    "type": "string"
+                },
+                "developerSummary": {
+                    "description": "The developer summary the author provided to give more information about the element",
+                    "type": "string"
+                },
+                "whoCreated": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                },
+                "whoModified": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                },
+                "whoOwner": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                }
+            }
+        },
+        "GroupElementRequestAPI": {
+            "type": "object",
+            "properties": {
+                "updateByName": {
+                    "description": "Indicates if the platform should attempt to find a group with the same developer name as the one provided\r\nand match them up by name as opposed to by ID.",
+                    "type": "boolean"
+                },
+                "groupElementId": {
+                    "description": "The unique identifier for the group element that holds this group element.",
+                    "type": "string"
+                },
+                "x": {
+                    "format": "int32",
+                    "description": "The x location of the Group on the Flow diagram.",
+                    "type": "integer"
+                },
+                "y": {
+                    "format": "int32",
+                    "description": "The y location of the Group on the Flow diagram.",
+                    "type": "integer"
+                },
+                "height": {
+                    "format": "int32",
+                    "description": "The height of the Group on the Flow diagram.",
+                    "type": "integer"
+                },
+                "width": {
+                    "format": "int32",
+                    "description": "The width of the Group on the Flow diagram.",
+                    "type": "integer"
+                },
+                "authorization": {
+                    "$ref": "#/definitions/GroupAuthorizationAPI"
+                },
+                "isOpen": {
+                    "description": "Is the Group open in the buildtime editor. default: true",
+                    "type": "boolean"
+                },
+                "identityProvider": {
+                    "$ref": "#/definitions/FlowIdentityProviderAPI"
+                },
+                "id": {
+                    "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
+                    "type": "string"
+                },
+                "elementType": {
+                    "description": "The type of element this metadata represents.",
+                    "type": "string"
+                },
+                "developerName": {
+                    "description": "The developer name for the element. This is useful for keeping track of the element in the modelling tool and the API.",
+                    "type": "string"
+                },
+                "developerSummary": {
+                    "description": "The developer summary the author provided to give more information about the element",
+                    "type": "string"
+                },
+                "whoCreated": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                },
+                "whoModified": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                },
+                "whoOwner": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                }
+            }
+        },
+        "FlowGraphElementRequestAPI": {
+            "type": "object",
+            "properties": {
+                "mapElements": {
+                    "description": "An array of map elements that are part of the flow graph.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MapElementRequestAPI"
+                    }
+                },
+                "groupElements": {
+                    "description": "An array of group elements that are part of the flow graph.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GroupElementRequestAPI"
+                    }
+                }
+            }
+        },
+        "PageTagAPI": {
+            "type": "object",
+            "properties": {
+                "valueElementToReferenceId": {
+                    "$ref": "#/definitions/ValueElementIdAPI"
+                },
+                "tagElementId": {
+                    "description": "The unique identifier for the Tag that this tag is associated. This Tag will be used to provide the Tag name at runtime and also ensure Tag content and object type references are maintained.",
+                    "type": "string"
+                }
+            }
+        },
+        "ValueToResetAPI": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "description": "The reference to the Value that should be reset.",
+                    "type": "string"
+                },
+                "resetType": {
+                    "description": "The mode for resetting the value e.g CLEAR or DEFAULT_VALUE",
+                    "type": "string"
+                }
+            }
+        },
+        "NavigationItemAPI": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The unique identifier for the NavigationItem. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests. This property is created by the service.",
+                    "type": "string"
+                },
+                "locationMapElementId": {
+                    "description": "The unique identifier for the Map Element that this NavigationItem \"points\" to.",
+                    "type": "string"
+                },
+                "developerName": {
+                    "description": "The developer name for the Navigation. This is useful for keeping track of the Navigation in the modeling tool and API.",
+                    "type": "string"
+                },
+                "developerSummary": {
+                    "description": "The developer summary the author provided to give more information about the Navigation.",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "The label to display the user.",
+                    "type": "string"
+                },
+                "navigationItems": {
+                    "description": "The navigation items that are available for this NavigationItem. The navigation items are the \"links\" the user can use to navigate around your Flow.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NavigationItemAPI"
+                    }
+                },
+                "order": {
+                    "format": "int32",
+                    "description": "The order in which this NavigationItem should appear in relation to other sibling NavigationItems.",
+                    "type": "integer"
+                },
+                "tags": {
+                    "description": "The list of tags that are associated with this NavigationItem.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PageTagAPI"
+                    }
+                },
+                "valuesToReset": {
+                    "description": "The list of values to reset that are associated with this navigation.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ValueToResetAPI"
+                    }
+                }
+            }
+        },
+        "NavigationElementResponseAPI": {
+            "type": "object",
+            "properties": {
+                "dateCreated": {
+                    "format": "date-time",
+                    "description": "The date the Navigation was first created.",
+                    "type": "string"
+                },
+                "dateModified": {
+                    "format": "date-time",
+                    "description": "The date the last modification was made to the Navigation.",
+                    "type": "string"
+                },
+                "whoCreated": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                },
+                "whoModified": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                },
+                "whoOwner": {
+                    "$ref": "#/definitions/BuilderWhoAPI"
+                },
+                "label": {
+                    "description": "The label to display to the user.",
+                    "type": "string"
+                },
+                "navigationItems": {
+                    "description": "The navigation items that are available for this navigation. The navigation items are the \"links\" the user\r\ncan use to navigate around your flow.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NavigationItemAPI"
+                    }
+                },
+                "tags": {
+                    "description": "The list of tags that are associated with this navigation.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PageTagAPI"
+                    }
+                },
+                "updateByName": {
+                    "description": "Indicates if the platform should attempt to find a navigation with the same developer name as the one\r\nprovided and match them up by name as opposed to by ID. This is useful when creating scripts to create\r\nflows, as you can use the <code>developerName</code> property as the reference as opposed to needing to know\r\nthe IDs of all created elements.",
+                    "type": "boolean"
+                },
+                "persistState": {
+                    "description": "Indicates if the platform should save state when navigating between elements",
+                    "type": "boolean"
+                },
+                "persistValues": {
+                    "description": "Indicates if the platform should save values when navigating between elements",
+                    "type": "boolean"
                 },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
@@ -12504,78 +13277,12 @@
                 }
             }
         },
-        "GroupElementRequestAPI": {
-            "type": "object",
-            "properties": {
-                "updateByName": {
-                    "description": "Indicates if the platform should attempt to find a group with the same developer name as the one provided\r\nand match them up by name as opposed to by ID.",
-                    "type": "boolean"
-                },
-                "groupElementId": {
-                    "description": "The unique identifier for the group element that holds this group element.",
-                    "type": "string"
-                },
-                "x": {
-                    "format": "int32",
-                    "description": "The x location of the Group on the Flow diagram.",
-                    "type": "integer"
-                },
-                "y": {
-                    "format": "int32",
-                    "description": "The y location of the Group on the Flow diagram.",
-                    "type": "integer"
-                },
-                "height": {
-                    "format": "int32",
-                    "description": "The height of the Group on the Flow diagram.",
-                    "type": "integer"
-                },
-                "width": {
-                    "format": "int32",
-                    "description": "The width of the Group on the Flow diagram.",
-                    "type": "integer"
-                },
-                "authorization": {
-                    "$ref": "#/definitions/GroupAuthorizationAPI"
-                },
-                "isOpen": {
-                    "description": "Is the Group open in the buildtime editor. default: true",
-                    "type": "boolean"
-                },
-                "identityProvider": {
-                    "$ref": "#/definitions/FlowIdentityProviderAPI"
-                },
-                "id": {
-                    "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
-                    "type": "string"
-                },
-                "elementType": {
-                    "description": "The type of element this metadata represents.",
-                    "type": "string"
-                },
-                "developerName": {
-                    "description": "The developer name for the element. This is useful for keeping track of the element in the modelling tool and the API.",
-                    "type": "string"
-                },
-                "developerSummary": {
-                    "description": "The developer summary the author provided to give more information about the element",
-                    "type": "string"
-                },
-                "whoCreated": {
-                    "$ref": "#/definitions/BuilderWhoAPI"
-                },
-                "whoModified": {
-                    "$ref": "#/definitions/BuilderWhoAPI"
-                },
-                "whoOwner": {
-                    "$ref": "#/definitions/BuilderWhoAPI"
-                }
-            }
-        },
         "IdentityProviderType": {
             "format": "int32",
             "enum": [
-                0
+                0,
+                1,
+                2
             ],
             "type": "integer"
         },
@@ -12620,6 +13327,30 @@
                 }
             }
         },
+        "IdentityProviderAPIItemCollectionResponse": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                },
+                "links": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/IdentityProviderAPI"
+                    },
+                    "readOnly": true
+                }
+            }
+        },
         "MacroElementRequestAPI": {
             "type": "object",
             "properties": {
@@ -12630,143 +13361,6 @@
                 "updateByName": {
                     "description": "Indicates if the platform should attempt to find a Macro with the same developer name as the one provided and match them up by name as opposed to 'id'. This is useful when creating scripts to create Flows - as you can use the developerName property as the reference as opposed to needing to know the ids of all created Elements.",
                     "type": "boolean"
-                },
-                "id": {
-                    "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
-                    "type": "string"
-                },
-                "elementType": {
-                    "description": "The type of element this metadata represents.",
-                    "type": "string"
-                },
-                "developerName": {
-                    "description": "The developer name for the element. This is useful for keeping track of the element in the modelling tool and the API.",
-                    "type": "string"
-                },
-                "developerSummary": {
-                    "description": "The developer summary the author provided to give more information about the element",
-                    "type": "string"
-                },
-                "whoCreated": {
-                    "$ref": "#/definitions/BuilderWhoAPI"
-                },
-                "whoModified": {
-                    "$ref": "#/definitions/BuilderWhoAPI"
-                },
-                "whoOwner": {
-                    "$ref": "#/definitions/BuilderWhoAPI"
-                }
-            }
-        },
-        "MapElementRequestAPI": {
-            "type": "object",
-            "properties": {
-                "operations": {
-                    "description": "The list of operations that should be performed when this Map Element executes. Operations are used to change the value of Values in the executing Flow (State).",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/OperationAPI"
-                    }
-                },
-                "listeners": {
-                    "description": "The list of listeners that should be registered when this Map Element executes.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ListenerAPI"
-                    }
-                },
-                "viewMessageAction": {
-                    "$ref": "#/definitions/MessageActionAPI"
-                },
-                "messageActions": {
-                    "description": "The list of message actions that should be executed when this Map Element executes. The message action objects define the interface of inputs/outputs for calling against each Service message.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/MessageActionAPI"
-                    }
-                },
-                "dataActions": {
-                    "description": "The list of data actions that should be executed when this map element executes. The data action objects\r\ndefine the values and bindings that should be used to perform CRUD operations against each service and value.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/DataActionAPI"
-                    }
-                },
-                "navigationOverrides": {
-                    "description": "The list of navigation overrides that should be applied when this Map Element executes.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/NavigationOverrideAPI"
-                    }
-                },
-                "vote": {
-                    "$ref": "#/definitions/VoteAPI"
-                },
-                "clearNavigationOverrides": {
-                    "type": "boolean"
-                },
-                "postUpdateToStream": {
-                    "description": "Indicates if this Map Element should post an update to the collaboration stream.",
-                    "type": "boolean"
-                },
-                "userContent": {
-                    "description": "The content that should be shown to the user at this step in the Flow. This property should only be used for very simple Flows and informational UI. For anything more than simple messaging, use the Page and associate it with this Map Element using the pageElementId property.",
-                    "type": "string"
-                },
-                "userContentDateModified": {
-                    "format": "date-time",
-                    "description": "The date the Map Elements usercontent was modified.",
-                    "type": "string"
-                },
-                "statusMessage": {
-                    "description": "The content that should be shown to the user while waiting for a system step to complete.",
-                    "type": "string"
-                },
-                "postUpdateMessage": {
-                    "description": "The content of the message that should be posted to the collaboration stream.",
-                    "type": "string"
-                },
-                "notAuthorizedMessage": {
-                    "description": "The content that should be shown to the user if they are not authorized to take action on this Map Element.",
-                    "type": "string"
-                },
-                "postUpdateWhenType": {
-                    "description": "The point at which the post should be made to the collaboration stream.",
-                    "type": "string"
-                },
-                "updateByName": {
-                    "description": "Indicates if the platform should attempt to find a Type with the same developer name as the one provided and match them up by name as opposed to 'id'. This is useful when creating scripts to create Flows - as you can use the developerName property as the reference as opposed to needing to know the ids of all created Elements.",
-                    "type": "boolean"
-                },
-                "groupElementId": {
-                    "description": "The unique identifier for the Group that contains this Map Element. If a Map Element is inside a Group, it inherits certain behaviors of the parent Group. For example, a Swimlane Group wraps all child Map Elements in a security context.",
-                    "type": "string"
-                },
-                "x": {
-                    "format": "int32",
-                    "description": "The x location of the Map Element on the Flow diagram.",
-                    "type": "integer"
-                },
-                "y": {
-                    "format": "int32",
-                    "description": "The y location of the Map Element on the Flow diagram.",
-                    "type": "integer"
-                },
-                "pageElementId": {
-                    "type": "string"
-                },
-                "pageElementDeveloperName": {
-                    "type": "string"
-                },
-                "outcomes": {
-                    "description": "The list of outcomes that are available for this Map Element. An Outcome is used to connect the flow of execution from one Map Element in the Flow to another. An Outcome can take the form of a Page button, but also define system steps such as rules.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/OutcomeAPI"
-                    }
-                },
-                "subflow": {
-                    "$ref": "#/definitions/SubflowAPI"
                 },
                 "id": {
                     "description": "The unique identifier for the element. The id should be null for \"insert\" requests and a valid identifier for \"update\" requests.",
@@ -13307,6 +13901,30 @@
                 }
             }
         },
+        "ServiceElementResponseAPIItemCollectionResponse": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                },
+                "links": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ServiceElementResponseAPI"
+                    },
+                    "readOnly": true
+                }
+            }
+        },
         "TagElementRequestAPI": {
             "type": "object",
             "properties": {
@@ -13565,13 +14183,63 @@
                 }
             }
         },
-        "TenantFeatureUpdateRequest": {
+        "EnvironmentClassificationType": {
+            "format": "int32",
+            "enum": [
+                0,
+                1,
+                2
+            ],
+            "type": "integer"
+        },
+        "EnvironmentAPI": {
             "type": "object",
             "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "isDefault": {
+                    "type": "boolean"
+                },
+                "classificationType": {
+                    "$ref": "#/definitions/EnvironmentClassificationType"
+                },
+                "requiresBuildUser": {
+                    "type": "boolean"
+                },
+                "nextEnvironmentId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
                 "tenantId": {
                     "format": "uuid",
                     "type": "string"
                 },
+                "createdAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "createdBy": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "format": "uuid",
+                    "type": "string"
+                }
+            }
+        },
+        "TenantFeatureUpdateRequest": {
+            "type": "object",
+            "properties": {
                 "featureFlagId": {
                     "format": "uuid",
                     "type": "string"
@@ -13731,6 +14399,90 @@
             "type": "object",
             "properties": {
                 "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "ReleaseFlowAPI": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "releaseId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "flowId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "versionId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "tenantId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "createdDate": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "createdBy": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "format": "uuid",
+                    "type": "string"
+                }
+            }
+        },
+        "ReleaseAPI": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "tenantId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "summary": {
+                    "type": "string"
+                },
+                "flows": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ReleaseFlowAPI"
+                    }
+                },
+                "createdAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "createdBy": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "format": "uuid",
                     "type": "string"
                 }
             }
@@ -14888,6 +15640,10 @@
                         "type": "string"
                     }
                 },
+                "className": {
+                    "description": "A space separated string of CSS classes to be applied to the outcome when rendering.",
+                    "type": "string"
+                },
                 "id": {
                     "description": "The unique identifier for the outcome.",
                     "type": "string"
@@ -15069,6 +15825,9 @@
                 },
                 "pageRequest": {
                     "$ref": "#/definitions/PageRequestAPI"
+                },
+                "messageActionRequest": {
+                    "$ref": "#/definitions/MessageActionAPI"
                 }
             }
         },
@@ -15321,6 +16080,324 @@
                 "isHistoricalNavigationEnabled": {
                     "description": "Indicates whether both the UI and api for historical navigation has been enabled/disabled.",
                     "type": "boolean"
+                },
+                "waitExpiresAt": {
+                    "format": "date-time",
+                    "description": "A currently configured wait, after which execution of the flow can continue.",
+                    "type": "string"
+                }
+            }
+        },
+        "ElementResponseAPI": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The unique identifier for the element",
+                    "type": "string"
+                },
+                "pageContainerId": {
+                    "description": "The unique identifier for the page container this element should be placed into. When rendering a UI, this is the best reference to use as the developer names are not guaranteed to be unique.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type tells the player the kind of element that needs to be rendered. This is usually to indicate if the container has particular layour properties such as vertical, horizontal or inline flow - or that the container is a group of tabs. The container type is not restricted to the enumeration provided here - however - all of the standard players provided by ManyWho are able to render the container types in the enum. If you wish to add more container types, be aware that you will need to update the player to support these.",
+                    "type": "string"
+                },
+                "developerName": {
+                    "description": "The name the author has given for this element.",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "The label for the element. This is often used as a title for the section of the page represented by this container.",
+                    "type": "string"
+                },
+                "order": {
+                    "format": "int32",
+                    "description": "The order in which this element should appear on the page with respect to other page containers at the same level in the element hierarchy.",
+                    "type": "integer"
+                },
+                "attributes": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "isEnabled": {
+                    "description": "Indicates if the element should be enabled. If the element is disabled, the default behavior is that all child components and containers are also disabled.",
+                    "type": "boolean"
+                },
+                "isEditable": {
+                    "description": "Indicates if the element should be editable. If the element is not editable, the default behavior is that all child components and containers are also not editable.",
+                    "type": "boolean"
+                },
+                "isVisible": {
+                    "description": "Indicates if the element should be visible. If the element is not visible, the default behavior is that all child components and containers are also not visible.",
+                    "type": "boolean"
+                },
+                "tags": {
+                    "description": "The page tag provides additional metadata that the author of the flow has defined for this element. Tags are a very powerful way of providing additional information to player developers to ensure the app is providing exactly the user experience you expect. This object will be further documented when we release the page composition tool.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EngineValueAPI"
+                    }
+                },
+                "outcomes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OutcomeResponseAPI"
+                    }
+                }
+            }
+        },
+        "PageContainerResponse2API": {
+            "type": "object",
+            "properties": {
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ElementResponseAPI"
+                    }
+                },
+                "id": {
+                    "description": "The unique identifier for the element",
+                    "type": "string"
+                },
+                "pageContainerId": {
+                    "description": "The unique identifier for the page container this element should be placed into. When rendering a UI, this is the best reference to use as the developer names are not guaranteed to be unique.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type tells the player the kind of element that needs to be rendered. This is usually to indicate if the container has particular layour properties such as vertical, horizontal or inline flow - or that the container is a group of tabs. The container type is not restricted to the enumeration provided here - however - all of the standard players provided by ManyWho are able to render the container types in the enum. If you wish to add more container types, be aware that you will need to update the player to support these.",
+                    "type": "string"
+                },
+                "developerName": {
+                    "description": "The name the author has given for this element.",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "The label for the element. This is often used as a title for the section of the page represented by this container.",
+                    "type": "string"
+                },
+                "order": {
+                    "format": "int32",
+                    "description": "The order in which this element should appear on the page with respect to other page containers at the same level in the element hierarchy.",
+                    "type": "integer"
+                },
+                "attributes": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "isEnabled": {
+                    "description": "Indicates if the element should be enabled. If the element is disabled, the default behavior is that all child components and containers are also disabled.",
+                    "type": "boolean"
+                },
+                "isEditable": {
+                    "description": "Indicates if the element should be editable. If the element is not editable, the default behavior is that all child components and containers are also not editable.",
+                    "type": "boolean"
+                },
+                "isVisible": {
+                    "description": "Indicates if the element should be visible. If the element is not visible, the default behavior is that all child components and containers are also not visible.",
+                    "type": "boolean"
+                },
+                "tags": {
+                    "description": "The page tag provides additional metadata that the author of the flow has defined for this element. Tags are a very powerful way of providing additional information to player developers to ensure the app is providing exactly the user experience you expect. This object will be further documented when we release the page composition tool.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EngineValueAPI"
+                    }
+                },
+                "outcomes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OutcomeResponseAPI"
+                    }
+                }
+            }
+        },
+        "NavigationItemResponse2API": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "developerName": {
+                    "type": "string"
+                },
+                "developerSummary": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NavigationItemResponse2API"
+                    }
+                },
+                "order": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "isActive": {
+                    "type": "boolean"
+                },
+                "isCurrent": {
+                    "type": "boolean"
+                },
+                "isEnabled": {
+                    "type": "boolean"
+                },
+                "isVisible": {
+                    "type": "boolean"
+                },
+                "locationMapElementId": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EngineValueAPI"
+                    }
+                }
+            }
+        },
+        "EngineNavigationResponse2API": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "developerName": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NavigationItemResponse2API"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EngineValueAPI"
+                    }
+                },
+                "isVisible": {
+                    "type": "boolean"
+                },
+                "isEnabled": {
+                    "type": "boolean"
+                },
+                "persistState": {
+                    "description": "Indicates if the platform should save state when navigating between elements",
+                    "type": "boolean"
+                },
+                "persistValues": {
+                    "description": "Indicates if the platform should save values when navigating between elements",
+                    "type": "boolean"
+                }
+            }
+        },
+        "EngineInvokeResponse2API": {
+            "type": "object",
+            "properties": {
+                "tenantId": {
+                    "format": "uuid",
+                    "type": "string"
+                },
+                "rootElement": {
+                    "$ref": "#/definitions/PageContainerResponse2API"
+                },
+                "navigations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EngineNavigationResponse2API"
+                    }
+                },
+                "outcomes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/OutcomeResponseAPI"
+                    }
+                },
+                "stateId": {
+                    "description": "The unique identifier for the initialized flow state. The state identifier is needed throughout the execution of the flow as it is the pointer that points the engine to the correct running instance of a flow.",
+                    "type": "string"
+                },
+                "stateToken": {
+                    "description": "The unique identifier for the token response from the state. The state token identifier changes with every cycle of request/response. The token is needed as it tells the engine how in-sync your request is with the current service side state.",
+                    "type": "string"
+                },
+                "waitMessage": {
+                    "description": "The message that should be shown to the user if the engine returns an Invoke Type of 'WAIT'.",
+                    "type": "string"
+                },
+                "notAuthorizedMessage": {
+                    "description": "The message that should be shown to the user if the engine returns an Invoke Type of 'STATUS'. The engine will automatically handle UI permissions - so this user will not recieve Page metadata.",
+                    "type": "string"
+                },
+                "flowId": {
+                    "description": "The unique identifier for the flow the user is currently executing against.",
+                    "type": "string"
+                },
+                "flowName": {
+                    "description": "The name for the flow the user is currently executing against.",
+                    "type": "string"
+                },
+                "flowVersion": {
+                    "description": "The unique identifier for the flow version the user is currently executing against.",
+                    "type": "string"
+                },
+                "currentMapElementId": {
+                    "description": "The unique identifier for the map element the user is currently executing against.",
+                    "type": "string"
+                },
+                "invokeType": {
+                    "description": "The way the engine responded to your initial invoke request.",
+                    "type": "string"
+                },
+                "statusCode": {
+                    "description": "The values mimic standard REST codes, but as a String. A \"200\" indicates the user is authenticated to execute the flow. A \"401\" indicates the user needs to login based on the authorization context information provided in the response.",
+                    "type": "string"
+                },
+                "joinFlowUri": {
+                    "description": "The Url that should be used to join this instance of this this flow with this player. For cross-platform situations, the join Url should redirect to the appropriate player for the calling device.",
+                    "type": "string"
+                },
+                "authorizationContext": {
+                    "$ref": "#/definitions/EngineAuthorizationContextAPI"
+                },
+                "waitExpiresAt": {
+                    "format": "date-time",
+                    "description": "A currently configured wait, after which execution of the flow can continue.",
+                    "type": "string"
+                },
+                "rootFaults": {
+                    "description": "Key value pairs taking the form of {\"errorCode\":\"errorMessage\"}. The root faults are populated if a fault has occurred that is not attributed to a specific value on the page. A root fault is often due to an element in the flow experiencing a fault and the author of the flow has determined that the user should be navigated to this page to rectify the problem. If an error is attributed to a value in the state, it will be bound to the page component as a validation error message.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "pageComponentDataResponses": {
+                    "description": "The meta data and data for the page components. The metadata tells the player if the component is visible, enabled, etc, and also tells the player the content of the component. This information is subject to change based on events performed by the UI and this array of objects will always be returned by the engine regardless of invokeType (assuming the user is authenticated and the element has UI).",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PageComponentDataResponseAPI"
+                    }
+                },
+                "pageContainerDataResponses": {
+                    "description": "The meta data for the page containers. The metadata tells the player if the container is visible, enabled, etc. This information is subject to change based on events performed by the UI and this array of objects will always be returned by the engine regardless of invokeType (assuming the user is authenticated and the element has UI).",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PageContainerDataResponseAPI"
+                    }
                 }
             }
         },
@@ -16054,13 +17131,8 @@
         },
         {
             "name": "Admin States",
-            "description": "_The flow state object provides data about a specific instance of a running flow_\r\n\r\nA flow state provides in-depth information about how users have interacted with a flow, from the data that has\r\nbeen collected in values, to the path of map elements that were travelled, to the users who have interacted with\r\nthe flow at the various stages of its execution. Flow state data is only available for active flows that have\r\nnot yet completed.\r\n\r\nThis API should also not be used for reporting purposes as we have a separate reporting API and reporting\r\ninfrastructure.",
+            "description": "_The flow state object provides data about a specific instance of a running flow_\r\n            \r\nA flow state provides in-depth information about how users have interacted with a flow, from the data that has\r\nbeen collected in values, to the path of map elements that were travelled, to the users who have interacted with\r\nthe flow at the various stages of its execution. Flow state data is only available for active flows that have\r\nnot yet completed.\r\n            \r\nThis API should also not be used for reporting purposes as we have a separate reporting API and reporting\r\ninfrastructure.",
             "x-displayName": "States"
-        },
-        {
-            "name": "Admin Stores",
-            "description": "_Stores define the location and credentials used to store data from the platform externally_\r\n            \r\nA store is an outside location that implements the External Storage API, used by the platform to store data\r\nexternally. They are intended as a data residency and compliance solution, for any customers that require\r\ngreater control about the eventual resting place of their platform data.\r\n\r\nCurrently, the External Storage API only supports storing states externally.",
-            "x-displayName": "Stores"
         },
         {
             "name": "Admin Tenants and Subtenants",
@@ -16095,12 +17167,12 @@
         },
         {
             "name": "Draw Flow",
-            "description": "_Flows represent an entire application_\r\n\r\nFlows represent an atomic package of elements that when run, are fully versioned. Flows can reference other\r\nflows using a \"flow out\" or by messaging other flows in the tenant using the Runtime Service. When referencing\r\nflows (parent or subflows), the platform will always take the latest activated and default version of the flow.\r\n\r\nWhen editing elements in a flow, you do not do this through this section of the APIs. Each element type has its\r\nown API endpoint for managing objects, etc.\r\n\r\nAs with group elements, a flow can also have permissions. However, unlike the group element, if a user cannot\r\nauthenticate to a flow, they cannot access any part of the flow state. Effectively, the flow authorization\r\nprotects your flow application from any access by running users that cannot successfully authenticate with the\r\nprovided authorization criteria. Therefore any group elements act as a subset of authorization. The running\r\nusers must first authenticate successfully into the flow and subsequently authenticate into any group elements.\r\nFurther to this, there's no requirement that the flow and group elements use the same service for\r\nauthentication. Flow builders can build flows that authenticate across multiple systems, move from\r\nunauthenticated to authenticated access, etc.",
+            "description": "_Flows represent an entire application_\r\n            \r\nFlows represent an atomic package of elements that when run, are fully versioned. Flows can reference other\r\nflows using a \"flow out\" or by messaging other flows in the tenant using the Runtime Service. When referencing\r\nflows (parent or subflows), the platform will always take the latest activated and default version of the flow.\r\n            \r\nWhen editing elements in a flow, you do not do this through this section of the APIs. Each element type has its\r\nown API endpoint for managing objects, etc.\r\n            \r\nAs with group elements, a flow can also have permissions. However, unlike the group element, if a user cannot\r\nauthenticate to a flow, they cannot access any part of the flow state. Effectively, the flow authorization\r\nprotects your flow application from any access by running users that cannot successfully authenticate with the\r\nprovided authorization criteria. Therefore any group elements act as a subset of authorization. The running\r\nusers must first authenticate successfully into the flow and subsequently authenticate into any group elements.\r\nFurther to this, there's no requirement that the flow and group elements use the same service for\r\nauthentication. Flow builders can build flows that authenticate across multiple systems, move from\r\nunauthenticated to authenticated access, etc.",
             "x-displayName": "Flow"
         },
         {
             "name": "Draw Flow Graph",
-            "description": "_The Flow Graph object provides the coordinate and basic configuration information of map and group elements._\r\n\r\nThe Flow Graph object is typically used for editing the layout of the flow for flow builders. This API should\r\nnot be used for creating new flows, but rather to manage map and group elements in an existing flow. The focus\r\nof this API is to allow flow builders to make coordinate changes to these elements while ensuring other flow\r\nbuilders are notified of these changes and can be updated in realtime.",
+            "description": "_The Flow Graph object provides the coordinate and basic configuration information of map and group elements._\r\n            \r\nThe Flow Graph object is typically used for editing the layout of the flow for flow builders. This API should\r\nnot be used for creating new flows, but rather to manage map and group elements in an existing flow. The focus\r\nof this API is to allow flow builders to make coordinate changes to these elements while ensuring other flow\r\nbuilders are notified of these changes and can be updated in realtime.",
             "x-displayName": "Flow Graph"
         },
         {
@@ -16110,7 +17182,7 @@
         },
         {
             "name": "Draw Group Element",
-            "description": "_The group element object represents any group or element in your flow that can contain map elements._\r\n\r\nGroup elements are used to add additional behavior to map elements in your flow. The group element currently\r\nonly supports the ability to change the authentication context of the map elements it contains. This allows\r\nbuilders to change the permissions for map elements contained in the group element and restrict the ability for\r\nrunning users to edit or take action on any outcomes.\r\n\r\n<aside class=\"alert alert-info\">\r\nIt’s important to note that the swimlane group element assigns a new authorization context to the map elements\r\nit holds. This authorization context is passed up the stack to any integrated services that can leverage this\r\ninformation to provide additional features.\r\n\r\nFor example, the Salesforce service uses the swimlane information to determine the percentage of running users\r\nthat have voted. It also uses this context to determine who should be notified or emailed.\r\n</aside>",
+            "description": "_The group element object represents any group or element in your flow that can contain map elements._\r\n            \r\nGroup elements are used to add additional behavior to map elements in your flow. The group element currently\r\nonly supports the ability to change the authentication context of the map elements it contains. This allows\r\nbuilders to change the permissions for map elements contained in the group element and restrict the ability for\r\nrunning users to edit or take action on any outcomes.\r\n            \r\n<aside class=\"alert alert-info\">\r\nIt’s important to note that the swimlane group element assigns a new authorization context to the map elements\r\nit holds. This authorization context is passed up the stack to any integrated services that can leverage this\r\ninformation to provide additional features.\r\n            \r\nFor example, the Salesforce service uses the swimlane information to determine the percentage of running users\r\nthat have voted. It also uses this context to determine who should be notified or emailed.\r\n</aside>",
             "x-displayName": "Group Element"
         },
         {
@@ -16123,17 +17195,17 @@
         },
         {
             "name": "Draw Map Element",
-            "description": "_The map element object represents any node or element in your flow diagram._\r\n\r\nMap elements are used to set out the actions and journey of your flow. Each map element performs an action,\r\nwhich may be to present the user with information, collect information, or perform logical actions such as\r\ninserting records into a database, executing business rules, or sending messages to a 3rd party application.\r\n\r\nThere's a lot of functionality packed into map elements, and that has been separated out in the sections below.\r\n\r\n### Data Actions\r\n\r\nA data action is used to perform create, read, update, or delete (CRUD) type operations on a service. There are\r\na number of features that make data actions particularly powerful:\r\n\r\n<ul><li>You do not need to manage <code>INSERT</code> vs. <code>UPDATE</code> operations. We automatically track the\r\nobjects in your flow and know if it is a new object to be inserted or an update to an existing object. This is\r\ndone using our <code>SAVE</code> operation. We do not separate <code>INSERT</code> and <code>UPDATE</code>.</li><li>You can configure filters using our common metadata. This means you do not need to understand the query\r\nlanguage of the underlying service - you can create queries using a standard notation and we automatically\r\ntranslate this notation into SQL (RDBMS), SOQL (Salesforce), ZOQL (Zuora), etc.</li><li>The data action automatically knows where the data needs to go. There is no need to map fields into the\r\ndatabase as this is already configured in the type. In addition, a number of services also support “smart save”\r\nwhich does a smart merge of data collected/changed in the flow with data already stored in the service.</li><li>If you need advanced data management capabilities such as summary roll-ups or joined tables, you can\r\nconfigure this using \"commands\" (as supported by the underlying service implementation).</li></ul><aside class=\"alert alert-info\">\r\nMap elements that support data actions are:\r\n<ul><li>Database Save</li><li>Database Load</li><li>Database Delete</li></ul></aside>\r\n\r\n### Listeners\r\n\r\nA Listener is used to listen to events on objects stored or managed by a service. When an event occurs (e.g. a\r\nrecord is updated) in the underlying application (e.g. Salesforce), the platform will inform the executing flow\r\nof the event so it can take appropriate action.\r\n\r\nListeners work as follows:\r\n<ol><li>You send the service the objects you want to listen to (referencing the appropriate value). In addition, you\r\nspecify the type of event you’re interested in (e.g. record created).</li><li>The service will notify the platform when that event has happened on the associated object(s). This will\r\npopulate the referenced value with the latest data from the service.</li><li>You specify the outcomes (with comparisons/rules) under which you \"accept\" the event and the path the flow\r\nshould follow. If those comparisons/rules are met, the flow will proceed to the next map element in the flow as\r\ndefined by the matching outcome. If not, the flow will continue to wait until the appropriate event occurs.</li></ol><aside class=\"alert alert-info\">\r\nMap elements that support listeners are:\r\n<ul><li>Database Load</li><li>Database Save</li><li>Message</li><li>Page</li></ul></aside>\r\n\r\n### Message Actions\r\n\r\nA Message Action is used to perform general API operations on a Service. There are a number of features that make Message Actions particularly powerful:\r\n\r\n<ul><li><strong>Multiple inputs/multiple outputs:</strong> When executing a message action, the service can specify\r\nmultiple inputs and multiple outputs post processing. E.g. you might have a service that moves a file from one\r\nfolder to another (in Box). For this you’d specify the file that needs to be moved and the location you’d\r\nlike to move it from and to (these would be the inputs). The outputs might be the file with revised information\r\nregarding its location and permissions.</li><li><strong>They can \"wait\"</strong>: When executing a message action, it can sometimes take some time to\r\ncomplete the request. Alternatively, the request may need to wait for a response. E.g. if you are sending a text\r\nmessage via Twilio and you want to have the flow wait for the response before proceeding. Other services may\r\nbe used precisely to cause the flow to wait, e.g. our Timer service that allows you to stop or wait the flow for\r\na timer interval or until a specific date. A \"wait\" can be created by building comparison/rules (e.g. the rules\r\nunder which the flow will proceed down a particular path). The flow will only follow an outcome until the rules\r\nare satisfied.</li></ul>\r\n\r\nIt's important to note that message actions are described in the service definition. The purpose of the message\r\nactions is to map values in the flow to the inputs and outputs specified by the service.\r\n\r\n<aside class=\"alert alert-info\">\r\nMap elements that support message actions are:\r\n<ul><li>Message</li><li>Page</li></ul></aside>\r\n\r\n### Navigation Overrides\r\n\r\nA navigation override is used to alter the functionality of navigation in your flow. As running users go through\r\na flow, it is often useful to alter how the navigation works. As a result, when the user gets to a particular\r\nmap element, you can execute changes to the navigation. These changes will persist until altered by another map\r\nelement. This can be useful in a variety of use-cases:\r\n\r\n<ul><li>Certain parts of the navigation should only be functional once a certain portion of the flow has been\r\ncompleted. You can either disable or only make visible these parts of the navigation when ready. For example,\r\nyou might want to disable navigation steps 3-5 until step 2 in your Flow has been completed.</li><li>You want the navigation to remember where the user was in a particular section of your flow. For example,\r\nthe user might be going through a sequence of diagnostic steps under a \"Diagnose\" navigation item. If the user\r\nthen clicks on an \"FAQ\" navigation item to answer a quick question, by default when they click back on\r\n\"Diagnose\" it will restart the diagnostic section. If each map element in the \"Diagnose\" section overrides the\r\nnavigation to point to that particular map element, when the user clicks on the \"Diagnose\" navigation item, it\r\nwill take them to that particular map element, not back to the start.</li></ul><aside class=\"alert alert-info\">\r\nAll map elements support navigation overrides.\r\n</aside>\r\n\r\n### Operations\r\n\r\nAn operation is used to make a change to a value or execute a macro in your flow. Each operation can be ordered\r\nallowing builders to do operations in a particular sequence - as individual commands performed on values. Here\r\nare some examples of operations:\r\n\r\n<ul><li>You want to assign the content of a value so the user doesn’t need to do it manually.</li><li>You want to get the next object from a list of objects in your flow.</li><li>You want to execute a macro that performs complex logic and business rules on values in your flow.</li></ul>\r\n\r\nIn mathematics, an operation would be something like: <code>x = 3</code><aside class=\"alert alert-info\">\r\nMap elements that support operations are:\r\n<ul><li>Operator</li></ul></aside>\r\n\r\n\r\n### Outcomes\r\n\r\nAn outcome is used to make move the running user(s) from one map element in the flow to another or from one map\r\nelement into another flow. An outcome can represent a button the running user(s) can click, or it can represent\r\na path the executing flow should follow based on logical operations in the flow. Outcomes can be combined with\r\nbusiness rules (provided by comparison/rules) to determine the path of execution based on pre-determined logic.\r\n\r\n<aside class=\"alert alert-info\">\r\nAll map elements support outcomes. Map elements that support outcomes with comparison/rules are:\r\n<ul><li>Decision</li><li>Message</li><li>Page</li></ul></aside><aside class=\"alert alert-success\">\r\nWhen using outcomes with comparison/rules, it’s important to note a few things:\r\n\r\n<ul><li><strong>Decision:</strong> The outcomes are evaluated in real-time and an outcome path is always selected or\r\nthe flow completes. Decisions do not have the ability to “wait”, they are processed and the correct outcome path\r\nis selected. If none of the outcome comparison/rules evaluate to true, the flow finishes.</li><li><strong>Message:</strong> The outcomes are evaluated in real-time every time the service responds with a\r\nstatus update. As a result, the flow will continue to “wait” until one of the outcome comparision/rules\r\nevaluates to true. A flow can “wait” for as long as the state exists on the platform.</li><li><strong>Page:</strong> The page effectively extends message. As a result, outcomes that have a blank “label”\r\nkey can be used with outcomes running users can click/select. For example, you may have a page used for\r\napproving some data. The page could also execute a message action with the Timer service to “wait” 2 hours. If\r\nthe message action returns before the running user(s) take action, the flow will progress down the outcome path\r\nconfigured to proceed when the Timer service responds. This is useful for escalation use-cases.</li></ul></aside>\r\n\r\n### Vote\r\n\r\nThe vote object is used to configure voting or multi-user approval options on an outcome. By configuring the\r\nvote, you can determine if a set number of running users or a percentage of running users (within the\r\nauthentication context of the map element) must click on a particular outcome before the flow will proceed down\r\nthat path. For example, before the approval is accepted, more than two running users must click on the “Approve”\r\noutcome before the flow will progress.\r\n\r\nThe implementation of the vote algorithm is determined by the service. Builders should refer to the\r\ndocumentation of the service being used. The first running user to click on an outcome contained in a voting map\r\nelement will force the platform to “lock” the page from any further user inputs. Effectively the map element\r\nbecomes read-only until the vote is completed.\r\n\r\n<aside class=\"alert alert-info\">\r\nMap elements that support voting are:\r\n<ul><li>Page</li><li>Step</li></ul></aside>",
+            "description": "_The map element object represents any node or element in your flow diagram._\r\n            \r\nMap elements are used to set out the actions and journey of your flow. Each map element performs an action,\r\nwhich may be to present the user with information, collect information, or perform logical actions such as\r\ninserting records into a database, executing business rules, or sending messages to a 3rd party application.\r\n            \r\nThere's a lot of functionality packed into map elements, and that has been separated out in the sections below.\r\n            \r\n### Data Actions\r\n            \r\nA data action is used to perform create, read, update, or delete (CRUD) type operations on a service. There are\r\na number of features that make data actions particularly powerful:\r\n            \r\n<ul><li>You do not need to manage <code>INSERT</code> vs. <code>UPDATE</code> operations. We automatically track the\r\nobjects in your flow and know if it is a new object to be inserted or an update to an existing object. This is\r\ndone using our <code>SAVE</code> operation. We do not separate <code>INSERT</code> and <code>UPDATE</code>.</li><li>You can configure filters using our common metadata. This means you do not need to understand the query\r\nlanguage of the underlying service - you can create queries using a standard notation and we automatically\r\ntranslate this notation into SQL (RDBMS), SOQL (Salesforce), ZOQL (Zuora), etc.</li><li>The data action automatically knows where the data needs to go. There is no need to map fields into the\r\ndatabase as this is already configured in the type. In addition, a number of services also support “smart save”\r\nwhich does a smart merge of data collected/changed in the flow with data already stored in the service.</li><li>If you need advanced data management capabilities such as summary roll-ups or joined tables, you can\r\nconfigure this using \"commands\" (as supported by the underlying service implementation).</li></ul><aside class=\"alert alert-info\">\r\nMap elements that support data actions are:\r\n<ul><li>Database Save</li><li>Database Load</li><li>Database Delete</li></ul></aside>\r\n            \r\n### Listeners\r\n            \r\nA Listener is used to listen to events on objects stored or managed by a service. When an event occurs (e.g. a\r\nrecord is updated) in the underlying application (e.g. Salesforce), the platform will inform the executing flow\r\nof the event so it can take appropriate action.\r\n            \r\nListeners work as follows:\r\n<ol><li>You send the service the objects you want to listen to (referencing the appropriate value). In addition, you\r\nspecify the type of event you’re interested in (e.g. record created).</li><li>The service will notify the platform when that event has happened on the associated object(s). This will\r\npopulate the referenced value with the latest data from the service.</li><li>You specify the outcomes (with comparisons/rules) under which you \"accept\" the event and the path the flow\r\nshould follow. If those comparisons/rules are met, the flow will proceed to the next map element in the flow as\r\ndefined by the matching outcome. If not, the flow will continue to wait until the appropriate event occurs.</li></ol><aside class=\"alert alert-info\">\r\nMap elements that support listeners are:\r\n<ul><li>Database Load</li><li>Database Save</li><li>Message</li><li>Page</li></ul></aside>\r\n            \r\n### Message Actions\r\n            \r\nA Message Action is used to perform general API operations on a Service. There are a number of features that make Message Actions particularly powerful:\r\n            \r\n<ul><li><strong>Multiple inputs/multiple outputs:</strong> When executing a message action, the service can specify\r\nmultiple inputs and multiple outputs post processing. E.g. you might have a service that moves a file from one\r\nfolder to another (in Box). For this you’d specify the file that needs to be moved and the location you’d\r\nlike to move it from and to (these would be the inputs). The outputs might be the file with revised information\r\nregarding its location and permissions.</li><li><strong>They can \"wait\"</strong>: When executing a message action, it can sometimes take some time to\r\ncomplete the request. Alternatively, the request may need to wait for a response. E.g. if you are sending a text\r\nmessage via Twilio and you want to have the flow wait for the response before proceeding. Other services may\r\nbe used precisely to cause the flow to wait, e.g. our Timer service that allows you to stop or wait the flow for\r\na timer interval or until a specific date. A \"wait\" can be created by building comparison/rules (e.g. the rules\r\nunder which the flow will proceed down a particular path). The flow will only follow an outcome until the rules\r\nare satisfied.</li></ul>\r\n            \r\nIt's important to note that message actions are described in the service definition. The purpose of the message\r\nactions is to map values in the flow to the inputs and outputs specified by the service.\r\n            \r\n<aside class=\"alert alert-info\">\r\nMap elements that support message actions are:\r\n<ul><li>Message</li><li>Page</li></ul></aside>\r\n            \r\n### Navigation Overrides\r\n            \r\nA navigation override is used to alter the functionality of navigation in your flow. As running users go through\r\na flow, it is often useful to alter how the navigation works. As a result, when the user gets to a particular\r\nmap element, you can execute changes to the navigation. These changes will persist until altered by another map\r\nelement. This can be useful in a variety of use-cases:\r\n            \r\n<ul><li>Certain parts of the navigation should only be functional once a certain portion of the flow has been\r\ncompleted. You can either disable or only make visible these parts of the navigation when ready. For example,\r\nyou might want to disable navigation steps 3-5 until step 2 in your Flow has been completed.</li><li>You want the navigation to remember where the user was in a particular section of your flow. For example,\r\nthe user might be going through a sequence of diagnostic steps under a \"Diagnose\" navigation item. If the user\r\nthen clicks on an \"FAQ\" navigation item to answer a quick question, by default when they click back on\r\n\"Diagnose\" it will restart the diagnostic section. If each map element in the \"Diagnose\" section overrides the\r\nnavigation to point to that particular map element, when the user clicks on the \"Diagnose\" navigation item, it\r\nwill take them to that particular map element, not back to the start.</li></ul><aside class=\"alert alert-info\">\r\nAll map elements support navigation overrides.\r\n</aside>\r\n            \r\n### Operations\r\n            \r\nAn operation is used to make a change to a value or execute a macro in your flow. Each operation can be ordered\r\nallowing builders to do operations in a particular sequence - as individual commands performed on values. Here\r\nare some examples of operations:\r\n            \r\n<ul><li>You want to assign the content of a value so the user doesn’t need to do it manually.</li><li>You want to get the next object from a list of objects in your flow.</li><li>You want to execute a macro that performs complex logic and business rules on values in your flow.</li></ul>\r\n            \r\nIn mathematics, an operation would be something like: <code>x = 3</code><aside class=\"alert alert-info\">\r\nMap elements that support operations are:\r\n<ul><li>Operator</li></ul></aside>\r\n            \r\n            \r\n### Outcomes\r\n            \r\nAn outcome is used to make move the running user(s) from one map element in the flow to another or from one map\r\nelement into another flow. An outcome can represent a button the running user(s) can click, or it can represent\r\na path the executing flow should follow based on logical operations in the flow. Outcomes can be combined with\r\nbusiness rules (provided by comparison/rules) to determine the path of execution based on pre-determined logic.\r\n            \r\n<aside class=\"alert alert-info\">\r\nAll map elements support outcomes. Map elements that support outcomes with comparison/rules are:\r\n<ul><li>Decision</li><li>Message</li><li>Page</li></ul></aside><aside class=\"alert alert-success\">\r\nWhen using outcomes with comparison/rules, it’s important to note a few things:\r\n            \r\n<ul><li><strong>Decision:</strong> The outcomes are evaluated in real-time and an outcome path is always selected or\r\nthe flow completes. Decisions do not have the ability to “wait”, they are processed and the correct outcome path\r\nis selected. If none of the outcome comparison/rules evaluate to true, the flow finishes.</li><li><strong>Message:</strong> The outcomes are evaluated in real-time every time the service responds with a\r\nstatus update. As a result, the flow will continue to “wait” until one of the outcome comparision/rules\r\nevaluates to true. A flow can “wait” for as long as the state exists on the platform.</li><li><strong>Page:</strong> The page effectively extends message. As a result, outcomes that have a blank “label”\r\nkey can be used with outcomes running users can click/select. For example, you may have a page used for\r\napproving some data. The page could also execute a message action with the Timer service to “wait” 2 hours. If\r\nthe message action returns before the running user(s) take action, the flow will progress down the outcome path\r\nconfigured to proceed when the Timer service responds. This is useful for escalation use-cases.</li></ul></aside>\r\n            \r\n### Vote\r\n            \r\nThe vote object is used to configure voting or multi-user approval options on an outcome. By configuring the\r\nvote, you can determine if a set number of running users or a percentage of running users (within the\r\nauthentication context of the map element) must click on a particular outcome before the flow will proceed down\r\nthat path. For example, before the approval is accepted, more than two running users must click on the “Approve”\r\noutcome before the flow will progress.\r\n            \r\nThe implementation of the vote algorithm is determined by the service. Builders should refer to the\r\ndocumentation of the service being used. The first running user to click on an outcome contained in a voting map\r\nelement will force the platform to “lock” the page from any further user inputs. Effectively the map element\r\nbecomes read-only until the vote is completed.\r\n            \r\n<aside class=\"alert alert-info\">\r\nMap elements that support voting are:\r\n<ul><li>Page</li><li>Step</li></ul></aside>",
             "x-displayName": "Map Element"
         },
         {
             "name": "Draw Navigation Element",
-            "description": "_The navigation element object provides a menu or navigation structure allowing users to move around your flow\r\napplication in an unstructured way._\r\n\r\nNavigation elements are used to set out the structure and map element locations which users can jump to\r\ndirectly. As a result, your map elements act more like web pages on a website than steps in a process. The base\r\nproperties of the navigation element are outlined here.",
+            "description": "_The navigation element object provides a menu or navigation structure allowing users to move around your flow\r\napplication in an unstructured way._\r\n            \r\nNavigation elements are used to set out the structure and map element locations which users can jump to\r\ndirectly. As a result, your map elements act more like web pages on a website than steps in a process. The base\r\nproperties of the navigation element are outlined here.",
             "x-displayName": "Navigation Element"
         },
         {
             "name": "Draw Page Element",
-            "description": "_The page element object provides the structure of your pages or screens._\r\n\r\nThe purpose of the page element is to allow flow builders to lay out the structure of the pages the users will\r\ninteract with as part of the flow application. The page element is extremely extensible and allows developers to\r\ncreate their own components and containers as needed to give users the best possible experience using your flow\r\napplication. The base properties of the page element are outlined here.\r\n\r\n### Page Containers\r\n\r\nA page container is used to determine the scaffolding of your page. Page containers allow flow builders to set\r\nout the relative position of page components on the page. In comparison with HTML5, a page container would be\r\nequivalent to a <code>div</code> tag. As a result, page containers do not have any value or input, they are\r\nsimply used to determine the layout or scaffolding aspects of the page.\r\n\r\nThe type of page container is determined by the <code>containerType</code> property and developers looking to\r\nbuild custom containers should use a unique <code>containerType</code> name to identify their container\r\nimplementation. The properties outlined here are the common attributes for typical containers, however, if\r\nthese do not suffice, developers should use the <code>attributes</code> to extend the attributes for their own\r\nspecific needs. It’s important to note that each of the properties here provides features and the engine does\r\nnot have any understanding of one container type from another.\r\n\r\n### Page Components\r\n\r\nA page component is used to show or edit information on your page. In comparison with HTML5, a page component\r\nwould be equivalent to an <code>input</code>, <code>textarea</code>, or similar tag. As a result, page\r\ncomponents typically do have a value or input, and are used to prompt the user for some form or input or to view\r\na particular piece of information on the page.\r\n\r\nThe type of page component is determined by the <code>componentType</code> property and developers looking to\r\nbuild custom components should use a unique <code>componentType</code> name to identify their component\r\nimplementation. The properties outlined here are the common attributes for typical components, however, if\r\nthese do not suffice, developers should use the <code>attributes</code> to extend the attributes for their own\r\nspecific needs. It’s important to note that each of the properties here provides features and the engine does\r\nnot have any understanding of one component type from another.\r\n\r\n### Page Conditions\r\n\r\nPage conditions are used to make your pages dynamic. Based on a set of page rules, the page conditions can\r\nassign values to your page components but also change various properties on your page components and containers\r\nsuch as: <code>required</code>, <code>editable</code>, <code>visible</code>. Page components can also have data\r\nrefreshed and <code>objectDataRequest</code> information dynamically assigned so you can, for example, change\r\ntable filters. This gives flow builders the ability to provide single pages that can provide the running user(s)\r\nwith a very dynamic experience.\r\n\r\n### Page Operation Assignment\r\n\r\nThe assignment object should be used when a value or piece of metadata for a component or container needs to be\r\nchanged. For example, a page component should be set as <code>required</code> under a specific set of\r\nconditions. Or a page container should no longer be visible under another set of conditions.\r\n\r\n### Page Operation Filter\r\n\r\nThe filter object should be used when applying filters based on conditions. For example, the list of options in\r\na combobox should be limited based on a checkbox being checked. The filter object can be applied to lists as\r\nwell as <code>objectDataRequests</code>.\r\n\r\n### Page Object Reference\r\n\r\nThe page object reference is a general purpose object for referencing data and metadata on the page. It can be\r\nconfigured to reference data that is not formally stored into the flow state and also value elements that are.",
+            "description": "_The page element object provides the structure of your pages or screens._\r\n            \r\nThe purpose of the page element is to allow flow builders to lay out the structure of the pages the users will\r\ninteract with as part of the flow application. The page element is extremely extensible and allows developers to\r\ncreate their own components and containers as needed to give users the best possible experience using your flow\r\napplication. The base properties of the page element are outlined here.\r\n            \r\n### Page Containers\r\n            \r\nA page container is used to determine the scaffolding of your page. Page containers allow flow builders to set\r\nout the relative position of page components on the page. In comparison with HTML5, a page container would be\r\nequivalent to a <code>div</code> tag. As a result, page containers do not have any value or input, they are\r\nsimply used to determine the layout or scaffolding aspects of the page.\r\n            \r\nThe type of page container is determined by the <code>containerType</code> property and developers looking to\r\nbuild custom containers should use a unique <code>containerType</code> name to identify their container\r\nimplementation. The properties outlined here are the common attributes for typical containers, however, if\r\nthese do not suffice, developers should use the <code>attributes</code> to extend the attributes for their own\r\nspecific needs. It’s important to note that each of the properties here provides features and the engine does\r\nnot have any understanding of one container type from another.\r\n            \r\n### Page Components\r\n            \r\nA page component is used to show or edit information on your page. In comparison with HTML5, a page component\r\nwould be equivalent to an <code>input</code>, <code>textarea</code>, or similar tag. As a result, page\r\ncomponents typically do have a value or input, and are used to prompt the user for some form or input or to view\r\na particular piece of information on the page.\r\n            \r\nThe type of page component is determined by the <code>componentType</code> property and developers looking to\r\nbuild custom components should use a unique <code>componentType</code> name to identify their component\r\nimplementation. The properties outlined here are the common attributes for typical components, however, if\r\nthese do not suffice, developers should use the <code>attributes</code> to extend the attributes for their own\r\nspecific needs. It’s important to note that each of the properties here provides features and the engine does\r\nnot have any understanding of one component type from another.\r\n            \r\n### Page Conditions\r\n            \r\nPage conditions are used to make your pages dynamic. Based on a set of page rules, the page conditions can\r\nassign values to your page components but also change various properties on your page components and containers\r\nsuch as: <code>required</code>, <code>editable</code>, <code>visible</code>. Page components can also have data\r\nrefreshed and <code>objectDataRequest</code> information dynamically assigned so you can, for example, change\r\ntable filters. This gives flow builders the ability to provide single pages that can provide the running user(s)\r\nwith a very dynamic experience.\r\n            \r\n### Page Operation Assignment\r\n            \r\nThe assignment object should be used when a value or piece of metadata for a component or container needs to be\r\nchanged. For example, a page component should be set as <code>required</code> under a specific set of\r\nconditions. Or a page container should no longer be visible under another set of conditions.\r\n            \r\n### Page Operation Filter\r\n            \r\nThe filter object should be used when applying filters based on conditions. For example, the list of options in\r\na combobox should be limited based on a checkbox being checked. The filter object can be applied to lists as\r\nwell as <code>objectDataRequests</code>.\r\n            \r\n### Page Object Reference\r\n            \r\nThe page object reference is a general purpose object for referencing data and metadata on the page. It can be\r\nconfigured to reference data that is not formally stored into the flow state and also value elements that are.",
             "x-displayName": "Page Element"
         },
         {
@@ -16142,7 +17214,7 @@
         },
         {
             "name": "Draw Tag Element",
-            "description": "_The tag element object provides additional runtime data to your page element containers/components and\r\nnavigation elements/items._\r\n\r\nThe purpose of the tag element is to add flexibility to your flow application user experience. The components,\r\ncontainers and navigation items in your flow can benefit from having access to the flow state to get more\r\ncontextual information. For example, if you have a numeric input field, it may be useful to know the possible\r\nrange or numeric values that can be provided by the end user - where that range depends on logic in the flow.\r\nThe components, containers and navigation items also supports <code>attributes</code> and these are often\r\nsufficient for many use-cases. As a result, only use the tag element if you need information that is very\r\nspecific to the flow state for particular running user(s).",
+            "description": "_The tag element object provides additional runtime data to your page element containers/components and\r\nnavigation elements/items._\r\n            \r\nThe purpose of the tag element is to add flexibility to your flow application user experience. The components,\r\ncontainers and navigation items in your flow can benefit from having access to the flow state to get more\r\ncontextual information. For example, if you have a numeric input field, it may be useful to know the possible\r\nrange or numeric values that can be provided by the end user - where that range depends on logic in the flow.\r\nThe components, containers and navigation items also supports <code>attributes</code> and these are often\r\nsufficient for many use-cases. As a result, only use the tag element if you need information that is very\r\nspecific to the flow state for particular running user(s).",
             "x-displayName": "Tag Element"
         },
         {
@@ -16156,8 +17228,13 @@
             "x-displayName": "Value Element"
         },
         {
+            "name": "Environment Environment",
+            "description": "A controller to be consumed by the tooling to access environments",
+            "x-displayName": "Environment"
+        },
+        {
             "name": "Features Features",
-            "description": "A controller to be consumed by the tooling to access developer/pm/po \r\ndriven feature flags.",
+            "description": "A controller to be consumed by the tooling to access developer/pm/po\r\ndriven feature flags.",
             "x-displayName": "Features"
         },
         {
@@ -16173,6 +17250,11 @@
         {
             "name": "Play Play",
             "x-displayName": "Play"
+        },
+        {
+            "name": "Release Release",
+            "description": "A controller to be consumed by the tooling to access releases",
+            "x-displayName": "Release"
         },
         {
             "name": "Run Data",
@@ -16200,17 +17282,17 @@
         },
         {
             "name": "Translate Cultures",
-            "description": "_The content value culture object represents a language or brand supported by the tenant._\r\n\r\nContent value cultures are used to specify the language/brand options that are available for the tenant. By\r\ndefault all tenants have a content value culture for USA (English). However, for multi-national/language\r\nuse-cases, others can be specified. They follow the ISO conventions for language. However, the platform also\r\nsupports a fourth variation on the standard ISO properties; this is <code>brand</code>. As a result, content\r\nvalue culture objects can also be used to specify white-labelling or single language variations on flow content.",
+            "description": "_The content value culture object represents a language or brand supported by the tenant._\r\n            \r\nContent value cultures are used to specify the language/brand options that are available for the tenant. By\r\ndefault all tenants have a content value culture for USA (English). However, for multi-national/language\r\nuse-cases, others can be specified. They follow the ISO conventions for language. However, the platform also\r\nsupports a fourth variation on the standard ISO properties; this is <code>brand</code>. As a result, content\r\nvalue culture objects can also be used to specify white-labelling or single language variations on flow content.",
             "x-displayName": "Cultures"
         },
         {
             "name": "Translate Flow",
-            "description": "_The flow translation object provides all of the content elements and properties in a flow that can be\r\ntranslated._\r\n\r\nThe flow translation object provides every element in the flow that is available for translation. It therefore\r\nprovides all of the content in the flow, regardless of whether or not the elements are shared (such as value and\r\npage elements) or specific to the flow (such as map or navigation elements). The flow translation object also\r\nincludes additional properties to help translators identify the purpose/location of the content being translated.",
+            "description": "_The flow translation object provides all of the content elements and properties in a flow that can be\r\ntranslated._\r\n            \r\nThe flow translation object provides every element in the flow that is available for translation. It therefore\r\nprovides all of the content in the flow, regardless of whether or not the elements are shared (such as value and\r\npage elements) or specific to the flow (such as map or navigation elements). The flow translation object also\r\nincludes additional properties to help translators identify the purpose/location of the content being translated.",
             "x-displayName": "Flow"
         },
         {
             "name": "Translate Map Element",
-            "description": "_The map element translation object provides all of the content properties in a map element that can be\r\ntranslated._\r\n\r\nThe map element translation object also includes additional properties to help translators identity the\r\npurpose/location of the content being translated.",
+            "description": "_The map element translation object provides all of the content properties in a map element that can be\r\ntranslated._\r\n            \r\nThe map element translation object also includes additional properties to help translators identity the\r\npurpose/location of the content being translated.",
             "x-displayName": "Map Element"
         },
         {
@@ -16220,17 +17302,17 @@
         },
         {
             "name": "Translate Page Element",
-            "description": "_The page element translation object provides all of the content properties in a page element that can be\r\ntranslated._\r\n\r\nThe page element translation object also includes additional properties to help translators identify the\r\npurpose/location of the content being translated.",
+            "description": "_The page element translation object provides all of the content properties in a page element that can be\r\ntranslated._\r\n            \r\nThe page element translation object also includes additional properties to help translators identify the\r\npurpose/location of the content being translated.",
             "x-displayName": "Page Element"
         },
         {
             "name": "Translate Type Element",
-            "description": "_The type element translation object provides all of the content properties in a type element that can be\r\ntranslated._\r\n\r\nThe type element translation object also includes additional properties to help translators identify the\r\npurpose/location of the content being translated.",
+            "description": "_The type element translation object provides all of the content properties in a type element that can be\r\ntranslated._\r\n            \r\nThe type element translation object also includes additional properties to help translators identify the\r\npurpose/location of the content being translated.",
             "x-displayName": "Type Element"
         },
         {
             "name": "Translate Value Element",
-            "description": "_The value element translation object provides all of the content properties in a value element that can be\r\ntranslated._\r\n\r\nThe value element translation object also includes additional properties to help translators identify the\r\npurpose/location of the content being translated.",
+            "description": "_The value element translation object provides all of the content properties in a value element that can be\r\ntranslated._\r\n            \r\nThe value element translation object also includes additional properties to help translators identify the\r\npurpose/location of the content being translated.",
             "x-displayName": "Value Element"
         }
     ],
@@ -16241,7 +17323,6 @@
                 "Admin Provisioning",
                 "Admin Runtimes",
                 "Admin States",
-                "Admin Stores",
                 "Admin Tenants and Subtenants",
                 "Admin Users"
             ]
@@ -16280,6 +17361,12 @@
             ]
         },
         {
+            "name": "Environment",
+            "tags": [
+                "Environment Environment"
+            ]
+        },
+        {
             "name": "Features",
             "tags": [
                 "Features Features"
@@ -16301,6 +17388,12 @@
             "name": "Play",
             "tags": [
                 "Play Play"
+            ]
+        },
+        {
+            "name": "Release",
+            "tags": [
+                "Release Release"
             ]
         },
         {
