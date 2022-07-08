@@ -14,19 +14,17 @@ API endpoint requests should be appended to the Boomi Flow API Host at:
 
 For example:
 
-GET **<span>ht</span>tps://flow.boomi.com**/api/draw/1/flow
+GET **https://flow.boomi.com/api/draw/1/flow**
 
 > **NOTE:**  The <a href="http://help.boomi.com/csh?context=GUID-95ad682d-ce04-494a-9235-e113a89406bc" target="_blank">API tool</a> in Boomi Flow allows you to automatically authorize and interact with the API within the Boomi Flow application.
 
 # Authentication
 
-The API supports authorization using either an API Key or an **Authorization** header.
+The API supports authorization using an API Key .
 
 API keys are specific to a tenant, meaning that each API key only authenticates you for the tenant selected when generating the API key.
 
 You can <a href="http://help.boomi.com/csh?context=GUID-7c393c4c-2193-40ee-b0aa-ef148c5b423c" target="_blank">manage your API keys</a> on the Boomi Flow **User Settings** page.
-
-> **NOTE:**  When making requests to the API, you may also need to include a **manywhotenant** header referencing the tenant ID value that the API key is associated with.
 
 ## Authentication using an API Key
 
@@ -38,10 +36,4 @@ To use an API Key to authenticate requests to the Boomi Flow API:
 
 3. If required, add a **manywhotenant** header referencing the tenant ID value that the API key is associated with.
 
-## Authentication using an Authorization header
 
-To use an Authorization header:
-
- 1. Obtain a token by sending a POST request to the **api/draw/1/authentication** endpoint.
- 
- 2. Insert the returned token into the standard HTTP **Authorization** header when performing any operations against the various supported APIs.
