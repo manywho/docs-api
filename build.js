@@ -11,7 +11,7 @@ const redocCommand = 'npx redoc-cli bundle openapi.json --output=index.html --ti
 
 const urlToFilePath = (path) => path.slice(1).split('/').join('~');
 
-fetch("https://flow.manywho.com/swagger/v1/swagger.json")
+fetch("https://flow.boomi.com/swagger/v1/swagger.json")
   .then((response) => response.json())
   .then((schema) => { 
       
